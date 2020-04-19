@@ -8,19 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>记录hexo博客的安装和使用过程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，hexo的原理基本是将用户编辑的.md文件发布成html的静态网页发布到$blog_workdir&#x2F;public目">
+  <meta name="description" content="这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，hexo的原理基本是将用户编辑的.md文件发布成html的静态网页发布到$blog_workdir&#x2F;public目录下，然后再">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录hexo博客的安装和使用过程">
 <meta property="og:url" content="http://yoursite.com/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[TOC] 这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，hexo的原理基本是将用户编辑的.md文件发布成html的静态网页发布到$blog_workdir&#x2F;public目">
+<meta property="og:description" content="这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，hexo的原理基本是将用户编辑的.md文件发布成html的静态网页发布到$blog_workdir&#x2F;public目录下，然后再">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/assets/imag/weixin_pay.jpg">
 <meta property="article:published_time" content="2020-04-18T15:19:52.000Z">
-<meta property="article:modified_time" content="2020-04-19T10:09:52.000Z">
+<meta property="article:modified_time" content="2020-04-19T11:08:11.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/assets/imag/weixin_pay.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,8 +160,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<p>这是我的第一篇博客，记录下hexo的安装过程：</p>
+        <p>这是我的第一篇博客，记录下hexo的安装过程：</p>
 <h3 id="1-创建一篇博客"><a href="#1-创建一篇博客" class="headerlink" title="1. 创建一篇博客"></a>1. 创建一篇博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 博客名字</span><br></pre></td></tr></table></figure>
 
 <p>更多信 息<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">创建</a></p>
@@ -171,7 +172,7 @@
 
 <blockquote>
 <p>对于引用的图片信息静态文件需要放到<font color=Red>$blog_workdir/themes/yilia/source/assets/imag/xxx.jpg</font></p>
-<p>下面，然后在_config.yml文件中把对应image的路径换成: /assets/imag/xxx.jpg就可以了 </p>
+<p>下面，然后在_config.yml文件中把对应图片的路径换成: /assets/imag/xxx.jpg就可以了</p>
 </blockquote>
 <h3 id="3-本地调试博客"><a href="#3-本地调试博客" class="headerlink" title="3. 本地调试博客"></a>3. 本地调试博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s //hexo server</span><br></pre></td></tr></table></figure>
 
@@ -184,6 +185,7 @@
 <p>之后执行下面的命令可以将$blog_workdir/public下面的博客内容发布到github主页了，如果遇到报错“Deployer not found: git”，执行下: <code>npm install hexo-deployer-git —save</code>，now begin enjoying your blogs~</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
+<p> 还有一些需要添加的东西，比如目录、表格、视频的添加方法，后续继续更新~<!---&emsp;是两个缩进---><img src="/assets/imag/weixin_pay.jpg" width="30%" height="30%" alt="我的头像哈哈" align=left><br><br><br><br><br><br><br><br></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
 <li><a href="https://z-950.github.io/2017/12/03/GET%E5%92%8CPOST/" target="_blank" rel="noopener">z-950的博客</a></li>
 <li><a href="http://litten.me/2017/07/09/prevent-spiders/" target="_blank" rel="noopener">litten的博客</a></li>
