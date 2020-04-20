@@ -6,23 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>记录hexo博客的安装和使用过程 | Hexo</title>
+  <title>leetcode1416-restore the array | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，">
+  <meta name="description" content="某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。  分析：典型的动态规划题目，假设字符串总共N">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录hexo博客的安装和使用过程">
-<meta property="og:url" content="http://yoursite.com/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="leetcode1416-restore the array">
+<meta property="og:url" content="http://yoursite.com/2020/04/19/lt-restore-the-array/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这是我的第一篇博客，记录下hexo的安装过程： 1. 创建一篇博客1$ hexo new 博客名字  更多信 息创建 2. 编辑博客   打开刚才创建的$blog_workdir&#x2F;source&#x2F;_posts&#x2F;博客名字.md，就可以开始使用markdown语法剪辑你的博客了，">
+<meta property="og:description" content="某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。  分析：典型的动态规划题目，假设字符串总共N">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/assets/imag/weixin_pay.jpg">
-<meta property="article:published_time" content="2020-04-18T15:19:52.000Z">
-<meta property="article:modified_time" content="2020-04-20T08:23:40.000Z">
+<meta property="article:published_time" content="2020-04-19T15:17:44.000Z">
+<meta property="article:modified_time" content="2020-04-20T13:04:45.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="笔记">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/assets/imag/weixin_pay.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -140,85 +139,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-第一篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-lt-restore-the-array" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      记录hexo博客的安装和使用过程
+      leetcode1416-restore the array
     </h1>
   
 
         
-        <a href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-04-18T15:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+        <a href="/2020/04/19/lt-restore-the-array/" class="archive-article-date">
+  	<time datetime="2020-04-19T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是我的第一篇博客，记录下hexo的安装过程：</p>
-<h4 id="1-创建一篇博客"><a href="#1-创建一篇博客" class="headerlink" title="1. 创建一篇博客"></a>1. 创建一篇博客</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 博客名字</span><br></pre></td></tr></table></figure>
-
-<p>更多信 息<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">创建</a><br></p>
-<h4 id="2-编辑博客"><a href="#2-编辑博客" class="headerlink" title="2. 编辑博客"></a>2. 编辑博客</h4><p>   打开刚才创建的$blog_workdir/source/_posts/博客名字.md，就可以开始使用markdown语法剪辑你的博客了，<a id="more"></a><!--这是注释，如果是more就是页截断，哈哈-->hexo的原理基本是将用户编辑的.md文件发布成html的静态网页发布到$blog_workdir/public目录下，然后再部署到服务端供大家阅读。</p>
-<p>​    这里推荐个非常好的主题<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>，对应的博客可以参考<a href="https://github.com/litten/BlogBackup" target="_blank" rel="noopener">BlogBackup</a> </p>
-<blockquote>
-<p>对于引用的图片信息静态文件需要放到<font color=Red>$blog_workdir/themes/yilia/source/assets/imag/xxx.jpg</font></p>
-<p>下面，然后在_config.yml文件中把对应图片的路径换成: /assets/imag/xxx.jpg就可以了</p>
+        <blockquote>
+<p>某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。</p>
 </blockquote>
-<h4 id="3-本地调试博客"><a href="#3-本地调试博客" class="headerlink" title="3. 本地调试博客"></a>3. 本地调试博客</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s //hexo server</span><br></pre></td></tr></table></figure>
+<p>分析：典型的动态规划题目，假设字符串总共N个数，<a id="more"></a>分别是s[0], s[1],…., s[N-1]，定义dp[i]为字符串s[i, N-1]总共有多少种分割方案0&lt;=i&lt;=N &amp;&amp; dp[N] ==1，dp[i] = sum(dp[j]), i+1 &lt;= j &lt;= N &amp;&amp; (s[i, j-1])&lt;=k，同时配合记忆化剪枝就写出递归的代码了～</p>
+<p><strong>c++实现代码如下：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solver</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(::<span class="built_in">std</span>::<span class="built_in">string</span>&amp; str, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> N = str.<span class="built_in">size</span>();</span><br><span class="line">      ::<span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(str.<span class="built_in">size</span>(), <span class="number">-1</span>)</span></span>;</span><br><span class="line">      <span class="keyword">auto</span> iter = [&amp;](<span class="keyword">int</span> i) &#123;</span><br><span class="line">          <span class="keyword">int</span> local_ans = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">if</span> (j == N) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (dp[j] &gt;= <span class="number">0</span>) <span class="keyword">return</span> dp[j];</span><br><span class="line">          <span class="keyword">if</span> (str[j] == <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; N; ++j) &#123;</span><br><span class="line">              num += str[j] - <span class="string">'0'</span>;</span><br><span class="line">              <span class="keyword">if</span> (num &gt; k) <span class="keyword">break</span>;</span><br><span class="line">              local_ans += iter(j+<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          dp[i] = local_ans;</span><br><span class="line">          <span class="keyword">return</span> local_ans;</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">return</span> ite(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>更多信息<a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">服务</a>，可以边编辑博客边在浏览器查看，非常方便。</p>
-<h4 id="4-发布静态文件"><a href="#4-发布静态文件" class="headerlink" title="4. 发布静态文件"></a>4. 发布静态文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g //hexo generate</span><br><span class="line">＃这里就是刚才提到的在把.md文件发布成html的静态网页</span><br></pre></td></tr></table></figure>
 
-<h4 id="5-部署到远端"><a href="#5-部署到远端" class="headerlink" title="5. 部署到远端"></a>5. 部署到远端</h4><p>打开$blog_workdir/_config.yml文件，找到deploy选项，然后编辑为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;xxx&#x2F;xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
-<p>之后执行下面的命令可以将$blog_workdir/public下面的博客内容发布到github主页了，如果遇到报错“Deployer not found: git”，执行下: <code>npm install hexo-deployer-git —save</code>，now begin enjoying your blogs~</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p> 还有一些需要添加的东西，比如目录、表格、视频的添加方法，后续继续更新，而且通过这次的hexo博客的部署发现很多markdown语法还需要熟悉和掌握，后续也会单开一个markdown专题~</p>
-<!---&emsp;是两个缩进--->
-
-<p><img src="/assets/imag/weixin_pay.jpg" width="30%" height="30%" alt="我的头像哈哈" align=left><br><br><br><br><br><br><br><br></p>
-<p><video controls="" autoplay="" name="media"><source src="/assets/video/yilia-mobile.mp4" type="video/mp4"></video></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://z-950.github.io/2017/12/03/GET%E5%92%8CPOST/" target="_blank" rel="noopener">z-950的博客</a></li>
-<li><a href="http://litten.me/2017/07/09/prevent-spiders/" target="_blank" rel="noopener">litten的博客</a></li>
-</ul>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/imag/weixin_pay.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -229,11 +181,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
         		</li>
       		
 		</ul>
@@ -289,7 +245,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/19/lt-restore-the-array/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,18 +259,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/19/lt-restore-the-array/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/20/how-to-search-on-github/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          leetcode1416-restore the array
+          如何在github上高效搜索有用的项目
         
       </div>
     </a>
   
   
-    <a href="/2020/04/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">记录hexo博客的安装和使用过程</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -334,19 +290,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建一篇博客"><span class="toc-number">1.</span> <span class="toc-text">1. 创建一篇博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-编辑博客"><span class="toc-number">2.</span> <span class="toc-text">2. 编辑博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-本地调试博客"><span class="toc-number">3.</span> <span class="toc-text">3. 本地调试博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-发布静态文件"><span class="toc-number">4.</span> <span class="toc-text">4. 发布静态文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-部署到远端"><span class="toc-number">5.</span> <span class="toc-text">5. 部署到远端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -355,7 +298,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="第一篇博客" data-title="记录hexo博客的安装和使用过程" data-url="http://yoursite.com/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"></div>
+	<div class="ds-thread" data-thread-key="lt-restore-the-array" data-title="leetcode1416-restore the array" data-url="http://yoursite.com/2020/04/19/lt-restore-the-array/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -378,8 +321,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/", 
-    sourceId: "第一篇博客",
+    url: "http://yoursite.com/2020/04/19/lt-restore-the-array/", 
+    sourceId: "lt-restore-the-array",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -388,7 +331,7 @@
   
 
   
-  <div id="SOHUCS" sid="第一篇博客" ></div> 
+  <div id="SOHUCS" sid="lt-restore-the-array" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
