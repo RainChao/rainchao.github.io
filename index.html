@@ -134,6 +134,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note-different-disaster-recovery-scheme" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/26/note-different-disaster-recovery-scheme/">不同数据库的灾备方案比较</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/26/note-different-disaster-recovery-scheme/" class="archive-article-date">
+  	<time datetime="2020-04-26T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>多集群的同步一般分为三种，一种是：一主多备，<strong>写主</strong>然后往备同步；另一种是：互为主备；第三种是多写；下面用示意图表示：</p>
+<h5 id="Bos的主备同步机制"><a href="#Bos的主备同步机制" class="headerlink" title="Bos的主备同步机制"></a>Bos的主备同步机制</h5><img src="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-26T14%3A35%3A54Z%2F1800%2F%2F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6" width="60%" height="60%" align=left\>
+
+<p>Bos的备份同步分为两个步骤：</p>
+<ol>
+<li>备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog</li>
+<li>备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝<blockquote>
+<p>一致性：多个并行的回放线程是无状态的，对于失败的操作是不断的重试直到成功，除非是南北链路故障的场景才会停止尝试并报警；</p>
+<p>正确性：CopyObject是原子的操作，可以保证同一个资源的并发同步是互不影响的；</p>
+</blockquote>
+<h5 id="Mysql的主备同步机制"><a href="#Mysql的主备同步机制" class="headerlink" title="Mysql的主备同步机制"></a>Mysql的主备同步机制</h5></li>
+</ol>
+<h5 id="Redis的主备同步机制"><a href="#Redis的主备同步机制" class="headerlink" title="Redis的主备同步机制"></a>Redis的主备同步机制</h5><h5 id="Sndb的同步机制"><a href="#Sndb的同步机制" class="headerlink" title="Sndb的同步机制"></a>Sndb的同步机制</h5><h5 id="正排的多机房同步机制"><a href="#正排的多机房同步机制" class="headerlink" title="正排的多机房同步机制"></a>正排的多机房同步机制</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">一致性</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/26/note-different-disaster-recovery-scheme/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-how-to-use-markdown" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -266,11 +355,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -729,11 +818,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,15 +846,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">一致性</a>
               </li>
             
             <div class="clearfix"></div>
