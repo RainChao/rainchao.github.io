@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>不同数据库的灾备方案比较 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排mola库为代表    下面分别就以上两类同步场景依次展开陈述。 二.">
+  <meta name="description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排mola库为代表    下面分别就以上两类同步场景依次展开陈述。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不同数据库的灾备方案比较">
 <meta property="og:url" content="http://yoursite.com/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排mola库为代表    下面分别就以上两类同步场景依次展开陈述。 二.">
+<meta property="og:description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排mola库为代表    下面分别就以上两类同步场景依次展开陈述。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-26T14%253A35%253A54Z%252F1800%252F%252F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/4b33f3fc99bacf35629f5d8cc87d8ebf?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-27T16%253A46%253A31Z%252F1800%252F%252F629e9fa36e9231afef50da5ecfeb046a3f7dad5e93731f6fad9dd895d65492ff">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1a9e314325ce7aa04c8ebe2b3391e0e1?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-27T10%253A32%253A56Z%252F1800%252F%252F53788422f6905544454f1a25f0d964199369329bedb45b279c853078d443128e">
 <meta property="article:published_time" content="2020-04-26T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-04-28T09:08:32.000Z">
+<meta property="article:modified_time" content="2020-04-28T09:24:52.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="分布式">
 <meta property="article:tag" content="一致性">
@@ -162,7 +162,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h5><p>多集群的同步场景一般分为两类种：</p>
+        <h4 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h4><p>多集群的同步场景一般分为两类种：</p>
 <ul>
 <li>主从关系：<strong>写主</strong>然后往从同步，以mysql、bos、redis为代表</li>
 <li>对等关系：所有的集群都承担写流量，基于同步方式的不同又分为：<ul>
@@ -172,22 +172,22 @@
 </li>
 </ul>
 <p>下面分别就以上两类同步场景依次展开陈述。</p>
-<h5 id="二-多从关系"><a href="#二-多从关系" class="headerlink" title="二. 多从关系"></a>二. 多从关系</h5><h6 id="2-1-Bos的主备同步机制"><a href="#2-1-Bos的主备同步机制" class="headerlink" title="2.1 Bos的主备同步机制"></a>2.1 Bos的主备同步机制</h6><img src="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-26T14%3A35%3A54Z%2F1800%2F%2F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6" width="60%" height="60%" align=left\>
+<a id="more"></a>
+
+<h4 id="二-多从关系"><a href="#二-多从关系" class="headerlink" title="二. 多从关系"></a>二. 多从关系</h4><h5 id="2-1-Bos的主备同步机制"><a href="#2-1-Bos的主备同步机制" class="headerlink" title="2.1 Bos的主备同步机制"></a>2.1 Bos的主备同步机制</h5><img src="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-26T14%3A35%3A54Z%2F1800%2F%2F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6" width="60%" height="60%" align=left\>
 
 <p>Bos的备份同步分为两个步骤：</p>
 <ol>
-<li><p>备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog</p>
-</li>
-<li><p>备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝</p>
+<li>备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog</li>
+<li>备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝</li>
+</ol>
 <blockquote>
 <p>一致性：多个并行的回放线程是无状态的，对于失败的操作是不断的重试直到成功，除非是南北链路故障的场景才会停止尝试并报警；</p>
 <p>时序性：CopyObject是原子的操作，可以保证同一个资源的并发同步是互不影响的；</p>
 </blockquote>
-<h6 id="2-2-Mysql的主备同步机制"><a href="#2-2-Mysql的主备同步机制" class="headerlink" title="2.2 Mysql的主备同步机制"></a>2.2 Mysql的主备同步机制</h6><p>to do</p>
-</li>
-</ol>
-<h6 id="2-3-Redis的主备同步机制"><a href="#2-3-Redis的主备同步机制" class="headerlink" title="2.3 Redis的主备同步机制"></a>2.3 Redis的主备同步机制</h6><p>   to do</p>
-<h5 id="三-对等关系－互相同步"><a href="#三-对等关系－互相同步" class="headerlink" title="三. 对等关系－互相同步"></a>三. 对等关系－互相同步</h5><h6 id="3-1-Sndb的同步机制"><a href="#3-1-Sndb的同步机制" class="headerlink" title="3.1 Sndb的同步机制"></a>3.1 Sndb的同步机制</h6><p><strong>3.11 名词解释</strong></p>
+<h5 id="2-2-Mysql的主备同步机制"><a href="#2-2-Mysql的主备同步机制" class="headerlink" title="2.2 Mysql的主备同步机制"></a>2.2 Mysql的主备同步机制</h5><p>   to do</p>
+<h5 id="2-3-Redis的主备同步机制"><a href="#2-3-Redis的主备同步机制" class="headerlink" title="2.3 Redis的主备同步机制"></a>2.3 Redis的主备同步机制</h5><p>   to do</p>
+<h4 id="三-对等关系－互相同步"><a href="#三-对等关系－互相同步" class="headerlink" title="三. 对等关系－互相同步"></a>三. 对等关系－互相同步</h4><h5 id="3-1-Sndb的同步机制"><a href="#3-1-Sndb的同步机制" class="headerlink" title="3.1 Sndb的同步机制"></a>3.1 Sndb的同步机制</h5><p><strong>3.11 名词解释</strong></p>
 <ul>
 <li>wal：write ahead log的缩写，记录操作日志的一种，分为undo（操作前的[k,v]状态）和redo（操作后的[k,v]状态）日志，用于在故障重启时的数据恢复</li>
 <li>Group：Sndb中的概念，代表拥有相同数据的多个物理实例，可以是主从（Sndb）、对等关系（Cube）</li>
@@ -221,7 +221,7 @@
 <li>时序性：由于同一个key可能在多个集群同时写入，为了保证同步的顺序一致性，这里的做法是在跨集群同步写入的时候采用<strong>put_if_newer</strong>的方式：与本地数据比较时间戳，更新的数据才写入</li>
 </ul>
 </blockquote>
-<h5 id="四-对等关系－双（多）写"><a href="#四-对等关系－双（多）写" class="headerlink" title="四. 对等关系－双（多）写"></a>四. 对等关系－双（多）写</h5><h6 id="4-1-正排的多机房同步机制"><a href="#4-1-正排的多机房同步机制" class="headerlink" title="4.1 正排的多机房同步机制"></a>4.1 正排的多机房同步机制</h6><p>这种同步场景相对直接：由一个写入源往所有的对等集群写入，所以对这种场景只需要保证写入的完备性和最终一致性就可以了，该场景跟接下来涉及的bos的替代同步方案类似；这里我们以正排的多机房同步机制为例：</p>
+<h5 id="四-对等关系－双（多）写"><a href="#四-对等关系－双（多）写" class="headerlink" title="四. 对等关系－双（多）写"></a>四. 对等关系－双（多）写</h5><h5 id="4-1-正排的多机房同步机制"><a href="#4-1-正排的多机房同步机制" class="headerlink" title="4.1 正排的多机房同步机制"></a>4.1 正排的多机房同步机制</h5><p>这种同步场景相对直接：由一个写入源往所有的对等集群写入，所以对这种场景只需要保证写入的完备性和最终一致性就可以了，该场景跟接下来涉及的bos的替代同步方案类似；这里我们以正排的多机房同步机制为例：</p>
 <img src="http://bj.bcebos.com/ibox-thumbnail98/1a9e314325ce7aa04c8ebe2b3391e0e1?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-27T10%3A32%3A56Z%2F1800%2F%2F53788422f6905544454f1a25f0d964199369329bedb45b279c853078d443128e" width="70%" height="60%" align=middle\>
 
 <p>以上同步流程如下：</p>
@@ -349,7 +349,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#一-前言"><span class="toc-number">1.</span> <span class="toc-text">一. 前言</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#二-多从关系"><span class="toc-number">2.</span> <span class="toc-text">二. 多从关系</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-Bos的主备同步机制"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Bos的主备同步机制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-Mysql的主备同步机制"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Mysql的主备同步机制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-3-Redis的主备同步机制"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Redis的主备同步机制</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#三-对等关系－互相同步"><span class="toc-number">3.</span> <span class="toc-text">三. 对等关系－互相同步</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#3-1-Sndb的同步机制"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Sndb的同步机制</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#四-对等关系－双（多）写"><span class="toc-number">4.</span> <span class="toc-text">四. 对等关系－双（多）写</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#4-1-正排的多机房同步机制"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 正排的多机房同步机制</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-前言"><span class="toc-number">1.</span> <span class="toc-text">一. 前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-多从关系"><span class="toc-number">2.</span> <span class="toc-text">二. 多从关系</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-Bos的主备同步机制"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Bos的主备同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-Mysql的主备同步机制"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Mysql的主备同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-Redis的主备同步机制"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Redis的主备同步机制</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-对等关系－互相同步"><span class="toc-number">3.</span> <span class="toc-text">三. 对等关系－互相同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-Sndb的同步机制"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Sndb的同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#四-对等关系－双（多）写"><span class="toc-number">3.2.</span> <span class="toc-text">四. 对等关系－双（多）写</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-正排的多机房同步机制"><span class="toc-number">3.3.</span> <span class="toc-text">4.1 正排的多机房同步机制</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
