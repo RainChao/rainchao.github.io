@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Raft协议学习笔记 | Hexo</title>
+  <title>如何在github上高效搜索有用的项目 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="掩卷沉思整理出来，才能变成自己的!  前半部分对raft协议的理解引用至: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;mindwind&#x2F;p&#x2F;5231986.html  背景分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：  拜占庭将军这种一致性问题有">
+  <meta name="description" content="如何高效的进行在github上搜索：  in:name python stars:&gt;1000 &#x2F;&#x2F;搜索名字中包含: python，且stars&gt;1000的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raft协议学习笔记">
-<meta property="og:url" content="http://yoursite.com/2020/04/21/note-raft/index.html">
+<meta property="og:title" content="如何在github上高效搜索有用的项目">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="掩卷沉思整理出来，才能变成自己的!  前半部分对raft协议的理解引用至: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;mindwind&#x2F;p&#x2F;5231986.html  背景分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：  拜占庭将军这种一致性问题有">
+<meta property="og:description" content="如何高效的进行在github上搜索：  in:name python stars:&gt;1000 &#x2F;&#x2F;搜索名字中包含: python，且stars&gt;1000的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-21T11:36:02.000Z">
-<meta property="article:modified_time" content="2020-04-26T14:28:45.000Z">
+<meta property="article:published_time" content="2020-04-20T12:36:02.000Z">
+<meta property="article:modified_time" content="2020-04-20T16:46:37.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="github">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -138,47 +137,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-note-raft" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何在github上快速检索" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Raft协议学习笔记
+      如何在github上高效搜索有用的项目
     </h1>
   
 
         
-        <a href="/2020/04/21/note-raft/" class="archive-article-date">
-  	<time datetime="2020-04-21T11:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
+        <a href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/" class="archive-article-date">
+  	<time datetime="2020-04-20T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>掩卷沉思整理出来，才能变成自己的!</p>
+        <p> 如何高效的进行在github上搜索：</p>
 <blockquote>
-<p>前半部分对raft协议的理解引用至: <a href="https://www.cnblogs.com/mindwind/p/5231986.html" target="_blank" rel="noopener">https://www.cnblogs.com/mindwind/p/5231986.html</a></p>
+<p><code>in:name python stars:&gt;1000</code></p>
+<p>//搜索名字中包含: python，且stars&gt;1000的</p>
 </blockquote>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：</p>
-<ol>
-<li>拜占庭将军这种一致性问题有没有解？</li>
-<li>有解的话需要满足什么样的条件？</li>
-<li>在特定的前提条件下提出一种解法</li>
-</ol>
-<h4 id="raft协议的可理解性"><a href="#raft协议的可理解性" class="headerlink" title="raft协议的可理解性"></a>raft协议的可理解性</h4><p>在一个由raft协议组织的集群中有三类角色，1、leader(领袖) 2、follower(群众) 3、candidate(候选人)，<a id="more"></a>刚开始所有参与者都是群众，首先开始一轮大选，大选初期所有的参与者都是follower，</p>
-<h5 id="leader选举过程"><a href="#leader选举过程" class="headerlink" title="leader选举过程"></a>leader选举过程</h5><p>在极简思维下，假设有3个参与者，刚开始的角色都是群众，</p>
-<h4 id="raft协议论文的阅读"><a href="#raft协议论文的阅读" class="headerlink" title="raft协议论文的阅读"></a>raft协议论文的阅读</h4><h4 id="打造自己的raft轮子"><a href="#打造自己的raft轮子" class="headerlink" title="打造自己的raft轮子"></a>打造自己的raft轮子</h4><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li>MIT6.824经典的分布式系统课程<br>视频：<a href="https://www.bilibili.com/video/av87684880" target="_blank" rel="noopener">https://www.bilibili.com/video/av87684880</a><br>如何学习这门课程的资料：<ul>
-<li><a href="https://www.zhihu.com/question/29597104" target="_blank" rel="noopener">https://www.zhihu.com/question/29597104</a>的TianBingJ的回答</li>
-<li><a href="https://zhuanlan.zhihu.com/p/110168818" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/110168818</a></li>
-<li><a href="https://juejin.im/post/5e98771c518825738c36493b" target="_blank" rel="noopener">https://juejin.im/post/5e98771c518825738c36493b</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/36547283" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/36547283</a></li>
-</ul>
-</li>
-</ul>
+<a id="more"></a>
+
+
+
+<blockquote>
+<p><code>in:readme python stars:&gt;1000</code></p>
+<p>//搜索readme.md中包含: python，且stars&gt;1000的</p>
+</blockquote>
+<blockquote>
+<p><code>in:description 微服务 stars:&gt;1000 language:c++ pushed:&gt;2019-09-03</code></p>
+<p>//搜索项目描述中包含: 微服务，且stars&gt;1000，且语言是c++，且最近一次push的时间&gt;2019-09-03</p>
+</blockquote>
 
       
 
@@ -192,11 +187,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
         		</li>
       		
 		</ul>
@@ -252,7 +243,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/21/note-raft/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -266,18 +257,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/25/how-to-use-markdown/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          markdown语法速记
+          Raft协议学习笔记
         
       </div>
     </a>
   
   
-    <a href="/2020/04/20/how-to-search-on-github/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何在github上高效搜索有用的项目</div>
+    <a href="/2020/04/19/leetcode%E4%B9%8Brestore%20the%20array/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode1416-restore the array</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -297,19 +288,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#raft协议的可理解性"><span class="toc-number">2.</span> <span class="toc-text">raft协议的可理解性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#leader选举过程"><span class="toc-number">2.1.</span> <span class="toc-text">leader选举过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#raft协议论文的阅读"><span class="toc-number">3.</span> <span class="toc-text">raft协议论文的阅读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打造自己的raft轮子"><span class="toc-number">4.</span> <span class="toc-text">打造自己的raft轮子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -318,7 +296,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="note-raft" data-title="Raft协议学习笔记" data-url="http://yoursite.com/2020/04/21/note-raft/"></div>
+	<div class="ds-thread" data-thread-key="如何在github上快速检索" data-title="如何在github上高效搜索有用的项目" data-url="http://yoursite.com/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -341,8 +319,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/21/note-raft/", 
-    sourceId: "note-raft",
+    url: "http://yoursite.com/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/", 
+    sourceId: "如何在github上快速检索",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -351,7 +329,7 @@
   
 
   
-  <div id="SOHUCS" sid="note-raft" ></div> 
+  <div id="SOHUCS" sid="如何在github上快速检索" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -457,14 +435,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -482,6 +452,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">一致性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
             
             <div class="clearfix"></div>

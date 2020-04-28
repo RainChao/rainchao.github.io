@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>不同数据库的灾备方案比较 | Hexo</title>
+  <title>markdown语法速记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言多集群的同步一般分为三种，一种是：一主多备，写主然后往备同步；另一种是：互为主备；第三种是多写；下面用示意图表示： Bos的主备同步机制  Bos的备份同步分为两个步骤：  备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog 备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝 一致性：多">
+  <meta name="description" content="引用：&gt; 我是引用      分割线：－－－(三个杠)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不同数据库的灾备方案比较">
-<meta property="og:url" content="http://yoursite.com/2020/04/26/note-different-disaster-recovery-scheme/index.html">
+<meta property="og:title" content="markdown语法速记">
+<meta property="og:url" content="http://yoursite.com/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言多集群的同步一般分为三种，一种是：一主多备，写主然后往备同步；另一种是：互为主备；第三种是多写；下面用示意图表示： Bos的主备同步机制  Bos的备份同步分为两个步骤：  备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog 备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝 一致性：多">
+<meta property="og:description" content="引用：&gt; 我是引用      分割线：－－－(三个杠)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-26T14%253A35%253A54Z%252F1800%252F%252F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6">
-<meta property="article:published_time" content="2020-04-26T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-04-26T17:09:22.000Z">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg">
+<meta property="article:published_time" content="2020-04-25T12:36:02.000Z">
+<meta property="article:modified_time" content="2020-04-26T17:11:21.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="分布式">
-<meta property="article:tag" content="一致性">
+<meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-26T14%253A35%253A54Z%252F1800%252F%252F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -140,39 +140,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-note-different-disaster-recovery-scheme" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何使用markdown" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      不同数据库的灾备方案比较
+      markdown语法速记
     </h1>
   
 
         
-        <a href="/2020/04/26/note-different-disaster-recovery-scheme/" class="archive-article-date">
-  	<time datetime="2020-04-26T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
+        <a href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/" class="archive-article-date">
+  	<time datetime="2020-04-25T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>多集群的同步一般分为三种，一种是：一主多备，<strong>写主</strong>然后往备同步；另一种是：互为主备；第三种是多写；下面用示意图表示：</p>
-<h5 id="Bos的主备同步机制"><a href="#Bos的主备同步机制" class="headerlink" title="Bos的主备同步机制"></a>Bos的主备同步机制</h5><img src="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-26T14%3A35%3A54Z%2F1800%2F%2F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6" width="60%" height="60%" align=left\>
-
-<p>Bos的备份同步分为两个步骤：</p>
-<ol>
-<li>备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog</li>
-<li>备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝<blockquote>
-<p>一致性：多个并行的回放线程是无状态的，对于失败的操作是不断的重试直到成功，除非是南北链路故障的场景才会停止尝试并报警；</p>
-<p>正确性：CopyObject是原子的操作，可以保证同一个资源的并发同步是互不影响的；</p>
+        <ol>
+<li><font color=Red>引用</font>：&gt;<blockquote>
+<p>我是引用</p>
 </blockquote>
-<h5 id="Mysql的主备同步机制"><a href="#Mysql的主备同步机制" class="headerlink" title="Mysql的主备同步机制"></a>Mysql的主备同步机制</h5></li>
+</li>
 </ol>
-<h5 id="Redis的主备同步机制"><a href="#Redis的主备同步机制" class="headerlink" title="Redis的主备同步机制"></a>Redis的主备同步机制</h5><h5 id="Sndb的同步机制"><a href="#Sndb的同步机制" class="headerlink" title="Sndb的同步机制"></a>Sndb的同步机制</h5><h5 id="正排的多机房同步机制"><a href="#正排的多机房同步机制" class="headerlink" title="正排的多机房同步机制"></a>正排的多机房同步机制</h5>
+<hr>
+<ol>
+<li><font color=Red>分割线</font>：－－－(三个杠)</li>
+</ol>
+<hr>
+<a id="more"></a>
+
+<ol>
+<li><font color=Red>图片</font>：![图片名字](图片路径)</li>
+</ol>
+<p><img src="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg" alt=""></p>
+<ol>
+<li><font color=Red>图片</font>：&lt;img src=”<a href="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg&quot;" target="_blank" rel="noopener">https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg&quot;</a> width=”60%” height=”60%” alt=”我的头像哈哈” align=left&gt;</li>
+</ol>
+<img src="https://pic4.zhimg.com/v2-a06d55eaff5d564690f35c94e27b8c97_b.jpg" width="60%" height="100%" alt="我的头像哈哈" align=left\>
+
+<hr>
+<ol>
+<li><font color=Red>超链接</font>：[链接名字](超链接的url)<br><a href="[https://zhuanlan.zhihu.com/p/36547283](https://zhuanlan.zhihu.com/p/36547283)">我是超链接, 点我</a></li>
+</ol>
+<hr>
+<ol>
+<li><font color=Red>有序列表</font>：1. + 空格</li>
+</ol>
+<ol>
+<li>我是有序列表</li>
+<li>我是有序列表</li>
+<li>我是有序列表</li>
+</ol>
+<hr>
+<ol>
+<li><font color=Red>无序列表</font>：- + 空格</li>
+</ol>
+<ul>
+<li>我是无序列表</li>
+<li>我是无序列表</li>
+<li>我是无序列表</li>
+</ul>
+<hr>
+<ol>
+<li><font color=Red>一段代码</font>：```c++(写c++代码)</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iosteam&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">char</span>**)</span> </span>&#123;</span><br><span class="line">  ::<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"i am in c++ code\n"</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol>
+<li><font color=Red>一句代码或者突出</font>：``</li>
+</ol>
+<p><code>我是一句代码</code></p>
+<hr>
+<ol>
+<li><font color=Red>注释</font>：&lt;!－－－注释内容－－－&gt;</li>
+</ol>
+<hr>
+<ol>
+<li><font color=Red>一级标题</font>：#</li>
+</ol>
+<h1 id="我是一级标题"><a href="#我是一级标题" class="headerlink" title="我是一级标题"></a>我是一级标题</h1><hr>
+<ol>
+<li><font color=Red>二级标题</font>：## </li>
+</ol>
+<h2 id="我是二级标题"><a href="#我是二级标题" class="headerlink" title="我是二级标题"></a>我是二级标题</h2><hr>
+<p><code>markdown最大支持到6级标题</code></p>
+
       
 
       
@@ -185,11 +242,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">一致性</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
@@ -245,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/26/note-different-disaster-recovery-scheme/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -259,9 +312,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          不同数据库的灾备方案比较
+        
+      </div>
+    </a>
   
-    <a href="/2020/04/25/how-to-use-markdown/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">markdown语法速记</div>
+  
+    <a href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Raft协议学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -289,7 +351,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="note-different-disaster-recovery-scheme" data-title="不同数据库的灾备方案比较" data-url="http://yoursite.com/2020/04/26/note-different-disaster-recovery-scheme/"></div>
+	<div class="ds-thread" data-thread-key="如何使用markdown" data-title="markdown语法速记" data-url="http://yoursite.com/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -312,8 +374,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/26/note-different-disaster-recovery-scheme/", 
-    sourceId: "note-different-disaster-recovery-scheme",
+    url: "http://yoursite.com/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/", 
+    sourceId: "如何使用markdown",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -322,7 +384,7 @@
   
 
   
-  <div id="SOHUCS" sid="note-different-disaster-recovery-scheme" ></div> 
+  <div id="SOHUCS" sid="如何使用markdown" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -428,14 +490,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -453,6 +507,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">一致性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
             
             <div class="clearfix"></div>
