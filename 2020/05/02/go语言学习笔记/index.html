@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 一致性 | Hexo</title>
+  <title>go语言学习 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/%E4%B8%80%E8%87%B4%E6%80%A7/index.html">
+  <meta name="description" content="笔记根据golang的官方学习文档整理：https:&#x2F;&#x2F;tour.golang.org&#x2F;list  1. 初识go语言1.1 go语言介绍2009年成为开源编程语言家族的一员优势：  不依赖任何外部依赖 静态类型语言，但是有动态语言的感觉 语言层面支持并发，这是go语言最大的特点，天生的支持并发 支持垃圾回收，动态分配内存但是不需要手动释放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go语言学习">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="笔记根据golang的官方学习文档整理：https:&#x2F;&#x2F;tour.golang.org&#x2F;list  1. 初识go语言1.1 go语言介绍2009年成为开源编程语言家族的一员优势：  不依赖任何外部依赖 静态类型语言，但是有动态语言的感觉 语言层面支持并发，这是go语言最大的特点，天生的支持并发 支持垃圾回收，动态分配内存但是不需要手动释放">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-02T12:36:02.000Z">
+<meta property="article:modified_time" content="2020-05-02T13:33:33.000Z">
 <meta property="article:author" content="RainChao">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -132,64 +138,254 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-go语言学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/" class="archive-article-date">
-  	<time datetime="2020-04-26T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/">不同数据库的灾备方案比较</a>
+    <h1 class="article-title" itemprop="name">
+      go语言学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-05-02T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>笔记根据golang的官方学习文档整理：<a href="https://tour.golang.org/list" target="_blank" rel="noopener">https://tour.golang.org/list</a></p>
+</blockquote>
+<h3 id="1-初识go语言"><a href="#1-初识go语言" class="headerlink" title="1. 初识go语言"></a>1. 初识go语言</h3><h4 id="1-1-go语言介绍"><a href="#1-1-go语言介绍" class="headerlink" title="1.1 go语言介绍"></a>1.1 go语言介绍</h4><p>2009年成为开源编程语言家族的一员<br>优势：</p>
+<ul>
+<li>不依赖任何外部依赖</li>
+<li>静态类型语言，但是有动态语言的感觉</li>
+<li>语言层面支持并发，这是go语言最大的特点，天生的支持并发</li>
+<li>支持垃圾回收，动态分配内存但是不需要手动释放</li>
+</ul>
+<a id="more"></a>
+
+<p>能用来做什么：</p>
+<ul>
+<li>服务器编程</li>
+<li>分布式系统，数据库代理</li>
+<li>网络编程，目前这一块的应用最广，包括 web应用，api应用，下载应用</li>
+<li>内存数据库</li>
+</ul>
+<h4 id="1-2-环境搭建"><a href="#1-2-环境搭建" class="headerlink" title="1.2 环境搭建"></a>1.2 环境搭建</h4><p>在<a href="[https://golang.org/dl/](https://golang.org/dl/)">官网</a>下载安装包，然后按照步骤依次执行命令安装就可以了。</p>
+<h3 id="2-基本语法"><a href="#2-基本语法" class="headerlink" title="2. 基本语法"></a>2. 基本语法</h3><h4 id="2-1-基本类型"><a href="#2-1-基本类型" class="headerlink" title="2.1 基本类型"></a>2.1 基本类型</h4><ul>
+<li><code>=</code>是赋值，<code>:=</code>是声明变量并赋值</li>
+<li>对于未初始化的变量：<code>0</code> for number type; <code>false</code> for bool type;  <code></code> for string type</li>
+<li>类型必须进行显示的强制转换，如: <code>var ff float64 = 1.0; var a int = int(ff)</code></li>
+</ul>
+<h4 id="2-2-控制语句"><a href="#2-2-控制语句" class="headerlink" title="2.2 控制语句"></a>2.2 控制语句</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//for</span></span><br><span class="line">sum := <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="number">10</span>; ++i &#123;</span><br><span class="line">   sum = sum + i</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> ;sum &lt; <span class="number">100</span>; &#123;</span><br><span class="line">   sum = sum + sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> sum &lt; <span class="number">100</span> &#123;</span><br><span class="line">   sum = sum + sum</span><br><span class="line">&#125; <span class="comment">//same with while in c</span></span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">&#125; <span class="comment">//loop forever</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if</span></span><br><span class="line">i := <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> i &lt; <span class="number">10</span> &#123;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> j := i*i; j &lt; <span class="number">100</span> &#123;</span><br><span class="line">  <span class="comment">//do something </span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">//do something else</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//switch</span></span><br><span class="line"><span class="comment">//break在每个case后面默认添加</span></span><br><span class="line"><span class="keyword">switch</span> time.Saturday &#123;</span><br><span class="line">	<span class="keyword">case</span> today + <span class="number">0</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Today."</span>)</span><br><span class="line">	<span class="keyword">case</span> today + <span class="number">1</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Tomorrow."</span>)</span><br><span class="line">	<span class="keyword">case</span> today + <span class="number">2</span>:</span><br><span class="line">		fmt.Println(<span class="string">"In two days."</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Too far away."</span>)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-复合类型"><a href="#2-3-复合类型" class="headerlink" title="2.3 复合类型"></a>2.3 复合类型</h4><ul>
+<li><strong>指针</strong></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指针</span></span><br><span class="line"><span class="comment">//不像c语言，go没有指针运算</span></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> p *<span class="keyword">int</span> = &amp;i</span><br><span class="line">*p = <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>struct</strong></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//struct: 多个类型的组合</span></span><br><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">int</span></span><br><span class="line">	Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line">v := Vertex&#123;<span class="number">1</span>,<span class="number">2</span>&#125; <span class="comment">//初始化</span></span><br><span class="line">v.X = <span class="number">4</span> <span class="comment">//成员赋值</span></span><br><span class="line">p := &amp;v</span><br><span class="line">p.X = <span class="number">4</span></span><br><span class="line">(*p).X = <span class="number">4</span> <span class="comment">//same with before</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>array</strong></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//array：是个固定大小的数组，跟c语言中数组类似</span></span><br><span class="line"><span class="keyword">var</span> a [<span class="number">2</span>]<span class="keyword">string</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="string">"hello"</span></span><br><span class="line">a[<span class="number">1</span>] = <span class="string">"world"</span></span><br><span class="line">b := [<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>slices</strong></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//slices：是array的引用，修改其slices的值也会修改相应的array</span></span><br><span class="line">names := [<span class="number">4</span>]<span class="keyword">string</span>&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>&#125;;</span><br><span class="line">a := names[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">b := names[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">b[<span class="number">1</span>] = <span class="string">"0"</span> <span class="comment">//a的值和array的值都相应改变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//一个空的slices的值是nil</span></span><br><span class="line"><span class="keyword">var</span> s []<span class="keyword">int</span></span><br><span class="line">fmt.Println(s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s)) <span class="comment">//[] 0 0</span></span><br><span class="line"><span class="keyword">if</span> s == <span class="literal">nil</span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">"nil!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//make：使用创建slices</span></span><br><span class="line">a := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>) <span class="comment">//创建一个len=5的slices一个len=5的slices</span></span><br><span class="line">b := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="number">5</span>) <span class="comment">//创建一个len=0, capacity=5的slices</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//append：添加元素 </span></span><br><span class="line"><span class="comment">//函数原型：func append(s []T, vs ...T) []T</span></span><br><span class="line"><span class="comment">//磊石c++中的vector，超过其capacity后会重新分配内存</span></span><br><span class="line"><span class="keyword">var</span> s []<span class="keyword">int</span> <span class="comment">//[]</span></span><br><span class="line">s = <span class="built_in">append</span>(s, <span class="number">1</span>) <span class="comment">//[1]</span></span><br><span class="line">s = <span class="built_in">append</span>(s, <span class="number">2</span>, <span class="number">3</span>) <span class="comment">//[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">一致性</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">go</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/29/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Bdiagonal%20traverse2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每天一道leetcode－1424diagonal traverse</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-初识go语言"><span class="toc-number">1.</span> <span class="toc-text">1. 初识go语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-go语言介绍"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 go语言介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-环境搭建"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 环境搭建</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本语法"><span class="toc-number">2.</span> <span class="toc-text">2. 基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-基本类型"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 基本类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-控制语句"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-复合类型"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 复合类型</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="go语言学习笔记" data-title="go语言学习" data-url="http://yoursite.com/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/", 
+    sourceId: "go语言学习笔记",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="go语言学习笔记" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -212,9 +408,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
