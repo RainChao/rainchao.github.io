@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>每天一道leetcode－1416restore the array | Hexo</title>
+  <title>系统设计导论-Tushar Roy | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。  分析：典型的动态规划题目，假设字符串总共N">
+  <meta name="description" content="基本概念 横向和纵向扩展 CAP（一致性、可用性和分区一致性）：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍 BASE：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每天一道leetcode－1416restore the array">
-<meta property="og:url" content="http://yoursite.com/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/index.html">
+<meta property="og:title" content="系统设计导论-Tushar Roy">
+<meta property="og:url" content="http://yoursite.com/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。  分析：典型的动态规划题目，假设字符串总共N">
+<meta property="og:description" content="基本概念 横向和纵向扩展 CAP（一致性、可用性和分区一致性）：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍 BASE：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-19T15:17:44.000Z">
-<meta property="article:modified_time" content="2020-04-29T04:50:22.000Z">
+<meta property="article:published_time" content="2020-05-27T15:17:44.000Z">
+<meta property="article:modified_time" content="2020-06-01T15:27:57.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="dp">
+<meta property="article:tag" content="系统设计">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -139,35 +137,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-每天一道leetcode之restore the array" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-系统设计导论－Tushar Roy" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      每天一道leetcode－1416restore the array
+      系统设计导论-Tushar Roy
     </h1>
   
 
         
-        <a href="/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/" class="archive-article-date">
-  	<time datetime="2020-04-19T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
+        <a href="/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/" class="archive-article-date">
+  	<time datetime="2020-05-27T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。</p>
-</blockquote>
-<p>分析：典型的动态规划题目，假设字符串总共N个数，<a id="more"></a>分别是s[0], s[1],…., s[N-1]，定义dp[i]为字符串s[i, N-1]总共有多少种分割方案0&lt;=i&lt;=N &amp;&amp; dp[N] ==1，dp[i] = sum(dp[j]), i+1 &lt;= j &lt;= N &amp;&amp; (s[i, j-1])&lt;=k，同时配合记忆化剪枝就写出递归的代码了～</p>
-<p><strong>c++实现代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solver</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(::<span class="built_in">std</span>::<span class="built_in">string</span>&amp; str, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> N = str.<span class="built_in">size</span>();</span><br><span class="line">      ::<span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(str.<span class="built_in">size</span>(), <span class="number">-1</span>)</span></span>;</span><br><span class="line">      <span class="keyword">auto</span> iter = [&amp;](<span class="keyword">int</span> i) &#123;</span><br><span class="line">          <span class="keyword">int</span> local_ans = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">if</span> (j == N) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (dp[j] &gt;= <span class="number">0</span>) <span class="keyword">return</span> dp[j];</span><br><span class="line">          <span class="keyword">if</span> (str[j] == <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; N; ++j) &#123;</span><br><span class="line">              num += str[j] - <span class="string">'0'</span>;</span><br><span class="line">              <span class="keyword">if</span> (num &gt; k) <span class="keyword">break</span>;</span><br><span class="line">              local_ans += iter(j+<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          dp[i] = local_ans;</span><br><span class="line">          <span class="keyword">return</span> local_ans;</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">return</span> ite(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
+        <h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><ul>
+<li>横向和纵向扩展</li>
+<li>CAP（一致性、可用性和分区一致性）：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍</li>
+<li>BASE：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做到<strong>强一致性</strong>也可以做到<strong>最终一致性</strong>:<ul>
+<li>Base Available：并不是“不可用”，而是响应时间上的损失、功能上的损失等</li>
+<li>Soft state：和硬状态想对，即允许系统中的数据存在中间状态（系统各副本中间的同步存在延时），并认为该中间状态不影响系统的可用性</li>
+<li>最终一致性：强调的是系统的各个副本在经过一定时间的同步会最终会达到一致性，而不需要实时保证系统的强一致性</li>
+</ul>
+</li>
+<li>Cache：如果数据存在热点现象就可以考虑cache，cache按分布方式分为本地和共享，按可用性又分为持久话和纯内存</li>
+<li>磁盘：顺序的磁盘读写性能是很可观的，所以在实际系统设计中尽量避免随机读写，可以先写内存然后批量顺序刷磁盘，like rocksdb</li>
+<li>CDN和边缘计算、节点</li>
+<li>Bloom滤波器</li>
+</ul>
+<h5 id="常用系统"><a href="#常用系统" class="headerlink" title="常用系统"></a>常用系统</h5><ul>
+<li>zookeeper：选主和分布式锁，zookeeper把所有的数据都存储在内存中，所以不能承载太多的数据存储；所以zookeeper适用于存储少量的但是高可用的数据的场景</li>
+<li>​</li>
+</ul>
 
       
 
@@ -181,15 +188,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统设计</a>
         		</li>
       		
 		</ul>
@@ -245,7 +244,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -259,18 +258,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          如何在github上高效搜索有用的项目
+          leetcode－常用技巧总结
         
       </div>
     </a>
   
   
-    <a href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo博客的安装和使用过程</div>
+    <a href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每天一道leetcode－滑动窗口总结</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -298,7 +297,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="每天一道leetcode之restore the array" data-title="每天一道leetcode－1416restore the array" data-url="http://yoursite.com/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/"></div>
+	<div class="ds-thread" data-thread-key="系统设计导论－Tushar Roy" data-title="系统设计导论-Tushar Roy" data-url="http://yoursite.com/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -321,8 +320,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/", 
-    sourceId: "每天一道leetcode之restore the array",
+    url: "http://yoursite.com/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/", 
+    sourceId: "系统设计导论－Tushar Roy",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -331,7 +330,7 @@
   
 
   
-  <div id="SOHUCS" sid="每天一道leetcode之restore the array" ></div> 
+  <div id="SOHUCS" sid="系统设计导论－Tushar Roy" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

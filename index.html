@@ -134,6 +134,270 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode技巧总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">leetcode－常用技巧总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-06-01T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1-stl中求最大值的方法"><a href="#1-stl中求最大值的方法" class="headerlink" title="1. stl中求最大值的方法"></a>1. stl中求最大值的方法</h5><p>max_element(iterator begin, iterator end);</p>
+<h5 id="2-求n个比特位中的不包含连续1的个数"><a href="#2-求n个比特位中的不包含连续1的个数" class="headerlink" title="2. 求n个比特位中的不包含连续1的个数"></a>2. 求n个比特位中的不包含连续1的个数</h5><blockquote>
+<p>该题是数位动态规划的思路：定义<strong>f(n)</strong>为n个比特位中的不包含连续1的个数：</p>
+<ul>
+<li>当最高位n为1时，次高位n-1位只能为0，所以这时只跟<strong>f(n-2)</strong>有关</li>
+<li>当最高位n为0时，次高位n-1位可为0可为1，所以这时跟<strong>f(n-1)</strong>有关</li>
+<li>综合以上分析：<strong>f(n)=f(n-1)+f(n-2)</strong></li>
+</ul>
+</blockquote>
+<h5 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-系统设计导论－Tushar Roy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/">系统设计导论-Tushar Roy</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/" class="archive-article-date">
+  	<time datetime="2020-05-27T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><ul>
+<li>横向和纵向扩展</li>
+<li>CAP（一致性、可用性和分区一致性）：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍</li>
+<li>BASE：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做到<strong>强一致性</strong>也可以做到<strong>最终一致性</strong>:<ul>
+<li>Base Available：并不是“不可用”，而是响应时间上的损失、功能上的损失等</li>
+<li>Soft state：和硬状态想对，即允许系统中的数据存在中间状态（系统各副本中间的同步存在延时），并认为该中间状态不影响系统的可用性</li>
+<li>最终一致性：强调的是系统的各个副本在经过一定时间的同步会最终会达到一致性，而不需要实时保证系统的强一致性</li>
+</ul>
+</li>
+<li>Cache：如果数据存在热点现象就可以考虑cache，cache按分布方式分为本地和共享，按可用性又分为持久话和纯内存</li>
+<li>磁盘：顺序的磁盘读写性能是很可观的，所以在实际系统设计中尽量避免随机读写，可以先写内存然后批量顺序刷磁盘，like rocksdb</li>
+<li>CDN和边缘计算、节点</li>
+<li>Bloom滤波器</li>
+</ul>
+<h5 id="常用系统"><a href="#常用系统" class="headerlink" title="常用系统"></a>常用系统</h5><ul>
+<li>zookeeper：选主和分布式锁，zookeeper把所有的数据都存储在内存中，所以不能承载太多的数据存储；所以zookeeper适用于存储少量的但是高可用的数据的场景</li>
+<li>​</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-每天一道leetcode之滑动窗口总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">每天一道leetcode－滑动窗口总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-05-22T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
+</blockquote>
+<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。</p>
+        
+          <a class="article-more-a" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sliding window</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-每天一道leetcode之绝对差不超过限制的最长连续子数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -251,9 +515,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为 *<em>k *</em>的连续的子数组的个数。</p>
+<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
 </blockquote>
-<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。
+<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。</p>
         
           <a class="article-more-a" href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/#more">more >></a>
         
@@ -716,11 +980,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -731,257 +995,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何在github上快速检索" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/">如何在github上高效搜索有用的项目</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/" class="archive-article-date">
-  	<time datetime="2020-04-20T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 如何高效的进行在github上搜索：</p>
-<blockquote>
-<p><code>in:name python stars:&gt;1000</code></p>
-<p>//搜索名字中包含: python，且stars&gt;1000的</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-每天一道leetcode之restore the array" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/">每天一道leetcode－1416restore the array</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/" class="archive-article-date">
-  	<time datetime="2020-04-19T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>某个程序本来应该输出一个整数数组。但是这个程序忘记输出空格了以致输出了一个数字字符串，我们所知道的信息只有：数组中所有整数都在 [1, k] 之间，且数组中的数字都没有前导零，给你字符串 s 和整数 k。可能会有多种不同的数组恢复结果，返回所有可能输出字符串 s 的数组方案数，如果数组方案数可能会很大，请你返回它对 10^9 + 7 取余 后的结果。</p>
-</blockquote>
-<p>分析：典型的动态规划题目，假设字符串总共N个数，
-        
-          <a class="article-more-a" href="/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/19/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Brestore%20the%20array/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">Hexo博客的安装和使用过程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-04-18T15:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记录下开源静态博客框架hexo的安装过程：</p>
-<h4 id="1-创建一篇博客"><a href="#1-创建一篇博客" class="headerlink" title="1. 创建一篇博客"></a>1. 创建一篇博客</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 博客名字</span><br></pre></td></tr></table></figure>
-
-<p>更多信 息<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">创建</a><br></p>
-<h4 id="2-编辑博客"><a href="#2-编辑博客" class="headerlink" title="2. 编辑博客"></a>2. 编辑博客</h4><p>   打开刚才创建的$blog_workdir/source/_posts/博客名字.md，就可以开始使用markdown语法剪辑你的博客了，
-        
-          <a class="article-more-a" href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/18/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
         </p>
       
 
@@ -1112,23 +1125,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">一致性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,7 +1133,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">一致性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1144,7 +1157,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
               </li>
             
             <div class="clearfix"></div>
