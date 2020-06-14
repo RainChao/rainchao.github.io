@@ -6,20 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Raft协议学习笔记 | Hexo</title>
+  <title>每天一道leetcode－制作m束花所需的最少天数 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="掩卷沉思整理出来，才能变成自己的!  前半部分对raft协议的理解引用至: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;mindwind&#x2F;p&#x2F;5231986.html  背景分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：  拜占庭将军这种一致性问题有">
+  <meta name="description" content="给你一个整数数组 bloomDay，以及两个整数 m 和 k 。 现需要制作 m 束花。制作花束时，需要使用花园中 相邻的 k 朵花 。 花园中有 n 朵花，第 i 朵花会在 bloomDay[i] 时盛开，并可以用于一束花中。 请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1 其中：1 &lt;&#x3D; bloomDay.size &lt;&#x3D; 10^5  分析：本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raft协议学习笔记">
-<meta property="og:url" content="http://yoursite.com/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="每天一道leetcode－制作m束花所需的最少天数">
+<meta property="og:url" content="http://yoursite.com/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="掩卷沉思整理出来，才能变成自己的!  前半部分对raft协议的理解引用至: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;mindwind&#x2F;p&#x2F;5231986.html  背景分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：  拜占庭将军这种一致性问题有">
+<meta property="og:description" content="给你一个整数数组 bloomDay，以及两个整数 m 和 k 。 现需要制作 m 束花。制作花束时，需要使用花园中 相邻的 k 朵花 。 花园中有 n 朵花，第 i 朵花会在 bloomDay[i] 时盛开，并可以用于一束花中。 请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1 其中：1 &lt;&#x3D; bloomDay.size &lt;&#x3D; 10^5  分析：本">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-21T11:36:02.000Z">
-<meta property="article:modified_time" content="2020-04-26T14:28:45.000Z">
+<meta property="article:published_time" content="2020-06-14T15:17:44.000Z">
+<meta property="article:modified_time" content="2020-06-14T05:31:31.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="二分查找">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -138,47 +139,39 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-raft学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-每天一道leetcode之制作 m 束花所需的最少天数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Raft协议学习笔记
+      每天一道leetcode－制作m束花所需的最少天数
     </h1>
   
 
         
-        <a href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-04-21T11:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
+        <a href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-06-14T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>掩卷沉思整理出来，才能变成自己的!</p>
-<blockquote>
-<p>前半部分对raft协议的理解引用至: <a href="https://www.cnblogs.com/mindwind/p/5231986.html" target="_blank" rel="noopener">https://www.cnblogs.com/mindwind/p/5231986.html</a></p>
+        <blockquote>
+<p>给你一个整数数组 <code>bloomDay</code>，以及两个整数 <code>m</code> 和 <code>k</code> 。</p>
+<p>现需要制作 <code>m</code> 束花。制作花束时，需要使用花园中 <strong>相邻的 k 朵花</strong> 。</p>
+<p>花园中有 <code>n</code> 朵花，第 <code>i</code> 朵花会在 <code>bloomDay[i]</code> 时盛开，并可以用于一束花中。</p>
+<p>请你返回从花园中摘 <code>m</code> 束花需要等待的最少的天数。如果不能摘到 <code>m</code> 束花则返回 <strong>-1</strong></p>
+<p>其中：1 &lt;= bloomDay.size &lt;= 10^5</p>
 </blockquote>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：</p>
-<ol>
-<li>拜占庭将军这种一致性问题有没有解？</li>
-<li>有解的话需要满足什么样的条件？</li>
-<li>在特定的前提条件下提出一种解法</li>
-</ol>
-<h4 id="raft协议的可理解性"><a href="#raft协议的可理解性" class="headerlink" title="raft协议的可理解性"></a>raft协议的可理解性</h4><p>在一个由raft协议组织的集群中有三类角色，1、leader(领袖) 2、follower(群众) 3、candidate(候选人)，<a id="more"></a>刚开始所有参与者都是群众，首先开始一轮大选，大选初期所有的参与者都是follower，</p>
-<h5 id="leader选举过程"><a href="#leader选举过程" class="headerlink" title="leader选举过程"></a>leader选举过程</h5><p>在极简思维下，假设有3个参与者，刚开始的角色都是群众，</p>
-<h4 id="raft协议论文的阅读"><a href="#raft协议论文的阅读" class="headerlink" title="raft协议论文的阅读"></a>raft协议论文的阅读</h4><h4 id="打造自己的raft轮子"><a href="#打造自己的raft轮子" class="headerlink" title="打造自己的raft轮子"></a>打造自己的raft轮子</h4><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li>MIT6.824经典的分布式系统课程<br>视频：<a href="https://www.bilibili.com/video/av87684880" target="_blank" rel="noopener">https://www.bilibili.com/video/av87684880</a><br>如何学习这门课程的资料：<ul>
-<li><a href="https://www.zhihu.com/question/29597104" target="_blank" rel="noopener">https://www.zhihu.com/question/29597104</a>的TianBingJ的回答</li>
-<li><a href="https://zhuanlan.zhihu.com/p/110168818" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/110168818</a></li>
-<li><a href="https://juejin.im/post/5e98771c518825738c36493b" target="_blank" rel="noopener">https://juejin.im/post/5e98771c518825738c36493b</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/36547283" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/36547283</a></li>
-</ul>
-</li>
-</ul>
+<p>分析：本题最直接的思路是采用暴力查找，时间复杂度是O(n^2)，肯定会超时。可以使用二分查找的思路将查找的时间复杂度从O(n^2)降低到O(nlog(n))，二分查找满足条件的下界。</p>
+<p>定义[l, r]区间始终满足能够制作m束花，且l是下界，也就是满足条件的第一天;</p>
+<a id="more"></a>
+
+<p><strong>c++实现代码如下：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 查找连续的一组满足特定条件的数组的通用做法：</span></span><br><span class="line">    <span class="comment">// 如果只需要知道个数，则cur计数即可；</span></span><br><span class="line">    <span class="comment">// 如果还需要知道区间，则[i-cur, i-1]或者[i-cur, i)</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; bloomDay, <span class="keyword">int</span> m, <span class="keyword">int</span> k, <span class="keyword">int</span> mid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bloomDay.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bloomDay[i] &lt;= mid) &#123;</span><br><span class="line">                cur++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                m -= (cur/k);</span><br><span class="line">                cur = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        m -= (cur/k); <span class="comment">// 最后的一部分padding不要忘记</span></span><br><span class="line">        <span class="keyword">return</span> m &lt;= <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; bloomDay, <span class="keyword">int</span> m, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> ite = ::<span class="built_in">std</span>::max_element(bloomDay.<span class="built_in">begin</span>(), bloomDay.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> mx = *ite;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> r = mx+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l+r)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (valid(bloomDay, m, k, mid)) &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                l = mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; mx) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -196,7 +189,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分查找</a>
         		</li>
       		
 		</ul>
@@ -252,7 +249,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -266,18 +263,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          markdown语法速记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/20/%E5%A6%82%E4%BD%95%E5%9C%A8github%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何在github上高效搜索有用的项目</div>
+    <a href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每天一道leetcode－等式方程的可满足性</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -297,19 +285,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#raft协议的可理解性"><span class="toc-number">2.</span> <span class="toc-text">raft协议的可理解性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#leader选举过程"><span class="toc-number">2.1.</span> <span class="toc-text">leader选举过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#raft协议论文的阅读"><span class="toc-number">3.</span> <span class="toc-text">raft协议论文的阅读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打造自己的raft轮子"><span class="toc-number">4.</span> <span class="toc-text">打造自己的raft轮子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -318,7 +293,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="raft学习笔记" data-title="Raft协议学习笔记" data-url="http://yoursite.com/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"></div>
+	<div class="ds-thread" data-thread-key="每天一道leetcode之制作 m 束花所需的最少天数" data-title="每天一道leetcode－制作m束花所需的最少天数" data-url="http://yoursite.com/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -341,8 +316,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/", 
-    sourceId: "raft学习笔记",
+    url: "http://yoursite.com/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/", 
+    sourceId: "每天一道leetcode之制作 m 束花所需的最少天数",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -351,7 +326,7 @@
   
 
   
-  <div id="SOHUCS" sid="raft学习笔记" ></div> 
+  <div id="SOHUCS" sid="每天一道leetcode之制作 m 束花所需的最少天数" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

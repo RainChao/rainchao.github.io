@@ -134,6 +134,273 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-每天一道leetcode之制作 m 束花所需的最少天数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">每天一道leetcode－制作m束花所需的最少天数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-06-14T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>给你一个整数数组 <code>bloomDay</code>，以及两个整数 <code>m</code> 和 <code>k</code> 。</p>
+<p>现需要制作 <code>m</code> 束花。制作花束时，需要使用花园中 <strong>相邻的 k 朵花</strong> 。</p>
+<p>花园中有 <code>n</code> 朵花，第 <code>i</code> 朵花会在 <code>bloomDay[i]</code> 时盛开，并可以用于一束花中。</p>
+<p>请你返回从花园中摘 <code>m</code> 束花需要等待的最少的天数。如果不能摘到 <code>m</code> 束花则返回 <strong>-1</strong></p>
+<p>其中：1 &lt;= bloomDay.size &lt;= 10^5</p>
+</blockquote>
+<p>分析：本题最直接的思路是采用暴力查找，时间复杂度是O(n^2)，肯定会超时。可以使用二分查找的思路将查找的时间复杂度从O(n^2)降低到O(nlog(n))，二分查找满足条件的下界。</p>
+<p>定义[l, r]区间始终满足能够制作m束花，且l是下界，也就是满足条件的第一天;</p>
+        
+          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分查找</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-每天一道leetcode之并查集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">每天一道leetcode－等式方程的可满足性</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="archive-article-date">
+  	<time datetime="2020-06-13T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇文章介绍一种新的数据结构：并查集，用于处理一对元素是否相连，且其关系是动态添加的，这一类问题是<strong>动态连通性</strong>问题，主要支持<strong>合并</strong>和<strong>是否在同一个集合中</strong>。</p>
+<blockquote>
+<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
+</blockquote>
+<p>分析:</p>
+        
+          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-每天一道leetcode之滑动窗口总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">每天一道leetcode－滑动窗口总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-06-12T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>给你一个整数数组 <code>nums</code> ，和一个表示限制的整数 <code>limit</code>，请你返回最长连续子数组的长度，该子数组中的任意两个元素之间的绝对差必须小于或者等于 <code>limit</code>。</p>
+</blockquote>
+<p>分析：该题是典型的滑动窗口＋multiset组合问题，multiset保存滑动窗口内的所有数，在滑动的过程中动态添加和剔除数据，整个滑动的过程中窗口的最大值就是最终要求的值。</p>
+        
+          <a class="article-more-a" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sliding window</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode技巧总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -282,93 +549,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-每天一道leetcode之滑动窗口总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">每天一道leetcode－滑动窗口总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-05-22T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
-</blockquote>
-<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。</p>
-        
-          <a class="article-more-a" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sliding window</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/22/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">展开全文 >></a>
         </p>
       
 
@@ -848,182 +1028,6 @@
 
 
   
-    <article id="post-如何使用markdown" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/">markdown语法速记</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/" class="archive-article-date">
-  	<time datetime="2020-04-25T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><font color=Red>引用</font>：&gt;<blockquote>
-<p>我是引用</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<ol>
-<li><font color=Red>分割线</font>：－－－(三个杠)</li>
-</ol>
-<hr>
-        
-          <a class="article-more-a" href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-raft学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Raft协议学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-04-21T11:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>掩卷沉思整理出来，才能变成自己的!</p>
-<blockquote>
-<p>前半部分对raft协议的理解引用至: <a href="https://www.cnblogs.com/mindwind/p/5231986.html" target="_blank" rel="noopener">https://www.cnblogs.com/mindwind/p/5231986.html</a></p>
-</blockquote>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>分布式一致性协议源至拜占庭将军问题，在有叛徒或者敌军间谍的情况下能否达成共识。映射到现实世界的模型中就是由于硬件错误或者网络拥塞，计算机和网络会出现不可预料的行为。综合下就是回答下面三个问题：</p>
-<ol>
-<li>拜占庭将军这种一致性问题有没有解？</li>
-<li>有解的话需要满足什么样的条件？</li>
-<li>在特定的前提条件下提出一种解法</li>
-</ol>
-<h4 id="raft协议的可理解性"><a href="#raft协议的可理解性" class="headerlink" title="raft协议的可理解性"></a>raft协议的可理解性</h4><p>在一个由raft协议组织的集群中有三类角色，1、leader(领袖) 2、follower(群众) 3、candidate(候选人)，
-        
-          <a class="article-more-a" href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/21/raft%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1117,11 +1121,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1137,7 +1141,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">一致性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1145,15 +1149,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">一致性</a>
+                <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
              
               <li class="article-tag-list-item">
