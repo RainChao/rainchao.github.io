@@ -157,47 +157,10 @@
         <h4 id="第一课：原子编程和内存模型-上"><a href="#第一课：原子编程和内存模型-上" class="headerlink" title="第一课：原子编程和内存模型(上)"></a>第一课：原子编程和内存模型(上)</h4><h5 id="1-1-乱序执行和SC-DRF"><a href="#1-1-乱序执行和SC-DRF" class="headerlink" title="1.1 乱序执行和SC-DRF"></a>1.1 乱序执行和SC-DRF</h5><p><strong>乱序原因1</strong>：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的</p>
 <img src="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A14%3A04Z%2F1800%2F%2F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b" width="70%" height="60%" align=left\>
 
-<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1b25d6dac595c45d2b6300a5fe554b77?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A15%3A55Z%2F1800%2F%2F458e85a98d96c52e4690b16508ed97e06a9ff7b5899a9669c0cd9bc54bf74c19" width="50%" height="60%" align=left\>
-
-<p><strong>乱序原因3</strong>：存储系统，开始指令的写都是入store buffer(L1 cache)，从store buffer刷新到共享的L2 cache的顺序没法保证</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1621372a50c6c8a0f2f4c0dcbf5ae47c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A17%3A11Z%2F1800%2F%2F9c36d3fefcc199a64257fc9fcb9a04ccf67a195ec23f35b5f7ef6729201b5f24" width="70%" height="60%" align=left\>
-
-<p><strong>乱序原因4</strong>：on-chip network，所谓<strong>片上网络</strong>指的就是L1 cache中的数据通过片上网络(总线)同步到其它的核的L1 cache</p>
-<p>综上所述，乱序执行不可避免，我们应该怎么办？</p>
-<ul>
-<li>不可避免是不争的事实</li>
-<li>如果多线程不涉及共享变量，乱序不会产生坏的影响</li>
-<li>如果读写指令涉及的是共享变量，程序员必须告诉编译器和处理器，告诉的方式就是<strong>锁</strong>或者<strong>原子变量</strong><ul>
-<li>当临界区包含多条指令时用锁</li>
-<li>当临界区只包含一个整数或者指针操作时用原子变量</li>
-</ul>
-</li>
-</ul>
-<h5 id="1-2-acquire和release语义"><a href="#1-2-acquire和release语义" class="headerlink" title="1.2 acquire和release语义"></a>1.2 acquire和release语义</h5><ul>
-<li><p><strong>acquire:</strong> <code>after is after</code>，之后的所有指令不会早于这条指令执行，尤其是读指令不会</p>
-</li>
-<li><p><strong>release:</strong> <code>before is before</code>，之前的所有指令不会晚于这条指令执行，尤其是写指令不会</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/38184988e565779a0750b4f7c9b1a7ab?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T10%3A17%3A26Z%2F1800%2F%2F7c4abe07084e82bce3ba8a93e88599be359106b8ad30900245679f7e38a36984" width="27%" height="60%" align=left\>
-</li>
-<li><p>acquire and release的实现是通过memory barrier实现的，memory barrier是即实现了acquire又实现了release语义，相当于一个双向的内存栅栏，对于大多数场景是没必要的有损编译和运行期的指令优化</p>
-</li>
-<li><p>一般acquire和release不能手工的使用memory barrier实现，需要借助锁或者原子变量实现acquire和release操作(锁的内部实现其实也是通过原子变量的load acquire和store release实现的，只不过对于锁在原子变量判断失败之后还会有额外的挂起内核的操作)</p>
-</li>
-</ul>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/218e5de263b94d57dad1ce96a09dd1b6?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T11%3A35%3A11Z%2F1800%2F%2F57b27cda8a67820942694b11b85a559f5d0361a8b97899b13a43d541236d0e1d" width="50%" height="60%" align=left\>
-
-<h5 id="1-3-顺序一致性语义"><a href="#1-3-顺序一致性语义" class="headerlink" title="1.3 顺序一致性语义"></a>1.3 顺序一致性语义</h5><p>on-chip network不保证全局序，通俗的讲就是多个原子变量的值对多个核的可见顺序是不保证的；因此这里就需要顺序一致性语义(<strong>seq-cst</strong>)保证在片上网络的全局一致性，</p>
-<h4 id="第二课：原子编程和内存模型-下"><a href="#第二课：原子编程和内存模型-下" class="headerlink" title="第二课：原子编程和内存模型(下)"></a>第二课：原子编程和内存模型(下)</h4><p>todo</p>
-<h4 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h4><ul>
-<li><p>片上网络指的是总线么？</p>
-</li>
-<li><p>数据同步到其它的核的过程中是先刷新到l2然后再刷新到l1中么？</p>
-</li>
-<li><p>下面的场景如果是</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/416f88791590965e0b03599944e9a727?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T12%3A47%3A30Z%2F1800%2F%2F4cb875c80974ef33f2c2d6469638a33d3320950e81c4cfb309d6c1823bb6287e" width="50%" height="60%" align=left\></li>
-</ul>
-
+<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态
+        
+          <a class="article-more-a" href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/#more">more >></a>
+        
       
 
       
@@ -1154,6 +1117,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
@@ -1163,14 +1146,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1186,7 +1161,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1194,23 +1169,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1219,10 +1186,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
               </li>
             
             <div class="clearfix"></div>

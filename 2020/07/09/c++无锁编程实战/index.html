@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>c++无锁编程高阶培训整理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态   乱序原因3：存储系统，开始指令的写都是入store buffer(L1 cache)，从sto">
+  <meta name="description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++无锁编程高阶培训整理">
 <meta property="og:url" content="http://yoursite.com/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态   乱序原因3：存储系统，开始指令的写都是入store buffer(L1 cache)，从sto">
+<meta property="og:description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A14%253A04Z%252F1800%252F%252F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1b25d6dac595c45d2b6300a5fe554b77?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A15%253A55Z%252F1800%252F%252F458e85a98d96c52e4690b16508ed97e06a9ff7b5899a9669c0cd9bc54bf74c19">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/218e5de263b94d57dad1ce96a09dd1b6?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T11%253A35%253A11Z%252F1800%252F%252F57b27cda8a67820942694b11b85a559f5d0361a8b97899b13a43d541236d0e1d">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/416f88791590965e0b03599944e9a727?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T12%253A47%253A30Z%252F1800%252F%252F4cb875c80974ef33f2c2d6469638a33d3320950e81c4cfb309d6c1823bb6287e">
 <meta property="article:published_time" content="2020-07-09T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-07-09T12:52:25.000Z">
+<meta property="article:modified_time" content="2020-07-09T12:55:12.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="markdown">
 <meta property="article:tag" content="c++">
@@ -169,7 +169,7 @@
         <h4 id="第一课：原子编程和内存模型-上"><a href="#第一课：原子编程和内存模型-上" class="headerlink" title="第一课：原子编程和内存模型(上)"></a>第一课：原子编程和内存模型(上)</h4><h5 id="1-1-乱序执行和SC-DRF"><a href="#1-1-乱序执行和SC-DRF" class="headerlink" title="1.1 乱序执行和SC-DRF"></a>1.1 乱序执行和SC-DRF</h5><p><strong>乱序原因1</strong>：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的</p>
 <img src="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A14%3A04Z%2F1800%2F%2F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b" width="70%" height="60%" align=left\>
 
-<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态</p>
+<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态<a id="more"></a></p>
 <img src="http://bj.bcebos.com/ibox-thumbnail98/1b25d6dac595c45d2b6300a5fe554b77?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A15%3A55Z%2F1800%2F%2F458e85a98d96c52e4690b16508ed97e06a9ff7b5899a9669c0cd9bc54bf74c19" width="50%" height="60%" align=left\>
 
 <p><strong>乱序原因3</strong>：存储系统，开始指令的写都是入store buffer(L1 cache)，从store buffer刷新到共享的L2 cache的顺序没法保证</p>
@@ -461,6 +461,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
@@ -470,14 +490,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,7 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,23 +513,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,10 +530,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
               </li>
             
             <div class="clearfix"></div>
