@@ -6,25 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>不同数据库的灾备方案比较 | Hexo</title>
+  <title>c++进阶－invoke的用法和实现 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排同步mola库为代表    下面分别就以上两类同步场景依次展开陈述。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="不同数据库的灾备方案比较">
-<meta property="og:url" content="http://yoursite.com/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="c++进阶－invoke的用法和实现">
+<meta property="og:url" content="http://yoursite.com/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一. 前言多集群的同步场景一般分为两类种：  主从关系：写主然后往从同步，以mysql、bos、redis为代表 对等关系：所有的集群都承担写流量，基于同步方式的不同又分为： 互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表 双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排同步mola库为代表    下面分别就以上两类同步场景依次展开陈述。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-26T14%253A35%253A54Z%252F1800%252F%252F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/4b33f3fc99bacf35629f5d8cc87d8ebf?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-27T16%253A46%253A31Z%252F1800%252F%252F629e9fa36e9231afef50da5ecfeb046a3f7dad5e93731f6fad9dd895d65492ff">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1a9e314325ce7aa04c8ebe2b3391e0e1?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-27T10%253A32%253A56Z%252F1800%252F%252F53788422f6905544454f1a25f0d964199369329bedb45b279c853078d443128e">
-<meta property="article:published_time" content="2020-04-26T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-04-29T04:48:38.000Z">
+<meta property="article:published_time" content="2020-07-14T12:36:02.000Z">
+<meta property="article:modified_time" content="2020-07-16T04:04:59.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="分布式">
-<meta property="article:tag" content="一致性">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="模版">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-04-26T14%253A35%253A54Z%252F1800%252F%252F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -142,98 +136,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-不同的数据库容灾备份同步方案比较" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c++进阶－invoke的用法和实现" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      不同数据库的灾备方案比较
+      c++进阶－invoke的用法和实现
     </h1>
   
 
         
-        <a href="/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/" class="archive-article-date">
-  	<time datetime="2020-04-26T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
+        <a href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2020-07-14T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h4><p>多集群的同步场景一般分为两类种：</p>
-<ul>
-<li>主从关系：<strong>写主</strong>然后往从同步，以mysql、bos、redis为代表</li>
-<li>对等关系：所有的集群都承担写流量，基于同步方式的不同又分为：<ul>
-<li>互相同步：所有的集群都承接写流量和读流量，然后互相同步，以sndb为代表</li>
-<li>双（多）写：由一个写入方往所有的对等集群写入，保证多个对等集群的一致性，以正排同步mola库为代表</li>
-</ul>
-</li>
-</ul>
-<p>下面分别就以上两类同步场景依次展开陈述。</p>
-<a id="more"></a>
-
-<h4 id="二-主从关系"><a href="#二-主从关系" class="headerlink" title="二. 主从关系"></a>二. 主从关系</h4><h5 id="2-1-Bos的主备同步机制"><a href="#2-1-Bos的主备同步机制" class="headerlink" title="2.1 Bos的主备同步机制"></a>2.1 Bos的主备同步机制</h5><img src="http://bj.bcebos.com/ibox-thumbnail98/ee51a5cefed94a930974aa37b7228210?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-26T14%3A35%3A54Z%2F1800%2F%2F23dc238fde30d917f9a100ac0276f468f6d78936fbc11ba85858fdc540c969c6" width="60%" height="60%" align=left\>
-
-<p>Bos的备份同步分为两个步骤：</p>
-<ol>
-<li>备集群的拉取线程负责从主集群拉取binlog操作日志，并写到本地的binlog</li>
-<li>备集群的回放线程负责重做拉取线程的binlog操作日志：调用bos原子的CopyObject接口完成某个资源从主集群到备集群的拷贝</li>
-</ol>
-<blockquote>
-<p>一致性：多个并行的回放线程是无状态的，对于失败的操作是不断的重试直到成功，除非是南北链路故障的场景才会停止尝试并报警；</p>
-<p>时序性：CopyObject是原子的操作，可以保证同一个资源的并发同步是互不影响的；</p>
-</blockquote>
-<h5 id="2-2-Mysql的主备同步机制"><a href="#2-2-Mysql的主备同步机制" class="headerlink" title="2.2 Mysql的主备同步机制"></a>2.2 Mysql的主备同步机制</h5><p>   to do</p>
-<h5 id="2-3-Redis的主备同步机制"><a href="#2-3-Redis的主备同步机制" class="headerlink" title="2.3 Redis的主备同步机制"></a>2.3 Redis的主备同步机制</h5><p>   to do</p>
-<h4 id="三-对等关系－互相同步"><a href="#三-对等关系－互相同步" class="headerlink" title="三. 对等关系－互相同步"></a>三. 对等关系－互相同步</h4><h5 id="3-1-Sndb的同步机制"><a href="#3-1-Sndb的同步机制" class="headerlink" title="3.1 Sndb的同步机制"></a>3.1 Sndb的同步机制</h5><p><strong>3.11 名词解释</strong></p>
-<ul>
-<li>wal：write ahead log的缩写，记录操作日志的一种，分为undo（操作前的[k,v]状态）和redo（操作后的[k,v]状态）日志，用于在故障重启时的数据恢复</li>
-<li>Group：Sndb中的概念，代表拥有相同数据的多个物理实例，可以是主从（Sndb）、对等关系（Cube）</li>
-<li>Meta Server：管理Sndb的集群拓扑，包括slot、table与Group的映射关系，Group中的实例信息等，每个集群有单独的Meta Server</li>
-</ul>
-<p><strong>3.22 同步机制</strong></p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/4b33f3fc99bacf35629f5d8cc87d8ebf?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-27T16%3A46%3A31Z%2F1800%2F%2F629e9fa36e9231afef50da5ecfeb046a3f7dad5e93731f6fad9dd895d65492ff" width="60%" height="60%" align=middle\>
-
-<p>基本思路是：现有集群架构之外，每个集群新增独立的同步代理：Syncer，负责从源集群拉取待同步的数据wal，写入到对应的需要同步数据的目的集群，工作流程如下：</p>
-<ol>
-<li>同步任务初始化阶段各个sync实例会通过源集群的Meta Server获取其维护的Group列表，然后通过抢占的方式获取一组Group实例的同步权</li>
-<li>抢占到Group之后，每个sync实例开始从各个源集群拉取自己负责的Group的wal日志，并根据wal日志回放写入到目标集群的对应Group中</li>
-<li>同时sync会定期向目标集群Meta Serve通过心跳上报任务信息，包括同步点，实例状态等，用于sync挂掉之后的断点续传和新加入的sync实例的任务抢占</li>
-</ol>
-<blockquote>
-<ul>
-<li>源集群故障：<ul>
-<li>源Group多次访问失败，报警</li>
-<li>源Group发生重建，全量版本号自增，sync从头开始同步数据</li>
-</ul>
-</li>
-<li>目标集群故障：<ul>
-<li>写入失败超过阈值报警</li>
-<li>Syncer如果跟不上源Group数据写入速度，导致源Group wal已经被删除，此时sync会请求源Group生成最新版本的checkpoint，然后重放所有数据</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>sync故障：现象是Meta Server接收不到sync的心跳，此时其原持有的同步任务会被其他Syncer抢占，然后从最新的同步点seq_no开始拉取数据</li>
-<li>循环同步：这种互相同步的场景会面临一个循环同步的问题，解决方法是在wal中添加是否是用户写入的标记，只有带该标记的才会被目的集群的sync拉取</li>
-<li>时序性：由于同一个key可能在多个集群同时写入，为了保证同步的顺序一致性，这里的做法是在跨集群同步写入的时候采用<strong>put_if_newer</strong>的方式：与本地数据比较时间戳，更新的数据才写入</li>
-</ul>
-</blockquote>
-<h5 id="四-对等关系－双（多）写"><a href="#四-对等关系－双（多）写" class="headerlink" title="四. 对等关系－双（多）写"></a>四. 对等关系－双（多）写</h5><h5 id="4-1-正排的多机房同步机制"><a href="#4-1-正排的多机房同步机制" class="headerlink" title="4.1 正排的多机房同步机制"></a>4.1 正排的多机房同步机制</h5><p>这种同步场景相对直接：由一个写入源往所有的对等集群写入，所以对这种场景只需要保证写入的完备性和最终一致性就可以了，该场景跟接下来涉及的bos的替代同步方案类似；这里我们以正排的多机房同步机制为例：</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1a9e314325ce7aa04c8ebe2b3391e0e1?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-04-27T10%3A32%3A56Z%2F1800%2F%2F53788422f6905544454f1a25f0d964199369329bedb45b279c853078d443128e" width="70%" height="60%" align=middle\>
-
-<p>以上同步流程如下：</p>
-<ol>
-<li>首先写入业务方通过rcmc发起写入请求，gcms-meta以nid为单位对三个机房并行写入：如果都写成功则返回成功；有某个机房写入失败则将对应的[nid, idc]信息写入pipe中；</li>
-<li>每个机房有自己的sync模块负责从pipe中消费写入失败的内容，并过滤属于自己机房的内容，然后从已经成功写入的机房的mola中拉取数据并同步；</li>
-</ol>
-<blockquote>
-<p>一致性：保证最终一致性</p>
-<p>时序性：通过nid散列到各个gcms-meta实例后上nid力度的锁的方式保证同一个nid的串行同步</p>
-</blockquote>
-
+        
       
 
       
@@ -246,11 +169,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">一致性</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模版</a>
         		</li>
       		
 		</ul>
@@ -306,7 +229,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +243,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/29/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8Bdiagonal%20traverse2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          每天一道leetcode－1424diagonal traverse
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8markdown/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">markdown语法速记</div>
+    <a href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">系统设计－流式系统综述和dstream源码剖析</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -351,19 +265,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-前言"><span class="toc-number">1.</span> <span class="toc-text">一. 前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-主从关系"><span class="toc-number">2.</span> <span class="toc-text">二. 主从关系</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-Bos的主备同步机制"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Bos的主备同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-Mysql的主备同步机制"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Mysql的主备同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-Redis的主备同步机制"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Redis的主备同步机制</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-对等关系－互相同步"><span class="toc-number">3.</span> <span class="toc-text">三. 对等关系－互相同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-Sndb的同步机制"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Sndb的同步机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#四-对等关系－双（多）写"><span class="toc-number">3.2.</span> <span class="toc-text">四. 对等关系－双（多）写</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-正排的多机房同步机制"><span class="toc-number">3.3.</span> <span class="toc-text">4.1 正排的多机房同步机制</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -372,7 +273,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="不同的数据库容灾备份同步方案比较" data-title="不同数据库的灾备方案比较" data-url="http://yoursite.com/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/"></div>
+	<div class="ds-thread" data-thread-key="c++进阶－invoke的用法和实现" data-title="c++进阶－invoke的用法和实现" data-url="http://yoursite.com/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -395,8 +296,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/04/26/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%B9%E7%81%BE%E5%A4%87%E4%BB%BD%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83/", 
-    sourceId: "不同的数据库容灾备份同步方案比较",
+    url: "http://yoursite.com/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/", 
+    sourceId: "c++进阶－invoke的用法和实现",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -405,7 +306,7 @@
   
 
   
-  <div id="SOHUCS" sid="不同的数据库容灾备份同步方案比较" ></div> 
+  <div id="SOHUCS" sid="c++进阶－invoke的用法和实现" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

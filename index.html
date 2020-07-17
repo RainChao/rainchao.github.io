@@ -134,32 +134,26 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-c++无锁编程实战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-c++进阶－invoke的用法和实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">c++无锁编程高阶培训整理</a>
+      <a class="article-title" href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/">c++进阶－invoke的用法和实现</a>
     </h1>
   
 
         
-        <a href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="archive-article-date">
-  	<time datetime="2020-07-09T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
+        <a href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2020-07-14T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="第一课：原子编程和内存模型-上"><a href="#第一课：原子编程和内存模型-上" class="headerlink" title="第一课：原子编程和内存模型(上)"></a>第一课：原子编程和内存模型(上)</h4><h5 id="1-1-乱序执行和SC-DRF"><a href="#1-1-乱序执行和SC-DRF" class="headerlink" title="1.1 乱序执行和SC-DRF"></a>1.1 乱序执行和SC-DRF</h5><p><strong>乱序原因1</strong>：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A14%3A04Z%2F1800%2F%2F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b" width="70%" height="60%" align=left\>
-
-<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态
-        
-          <a class="article-more-a" href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/#more">more >></a>
         
       
 
@@ -173,11 +167,181 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模版</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-系统设计－流式处理系统概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">系统设计－流式系统综述和dstream源码剖析</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2020-07-13T02:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1-应用场景"><a href="#1-应用场景" class="headerlink" title="1.  应用场景"></a>1.  应用场景</h5><ul>
+<li>实时ETL，对数据进行清洗、抽取和转储，用于实时建库</li>
+<li>实时数据分析和统计，对业务指标进行二次加工和聚合，用于实时报表和实时大屏</li>
+<li>实时事件处理，如实时修改高性能存储中的模型</li>
+</ul>
+<h5 id="2-流处理系统的三种语义"><a href="#2-流处理系统的三种语义" class="headerlink" title="2. 流处理系统的三种语义"></a>2. 流处理系统的三种语义</h5><ul>
+<li><strong>at most once(不重可丢)</strong>：消息需要去重，不要求消息幂等；这一种语义无需做任何额外的控制，实现起来最为简单，因此也通常有着最优的性能</li>
+<li><strong>at least once(不丢可重)</strong>：要求消息幂等，而且消息消费server无状态</li>
+<li><strong>exactly once(不丢不重)</strong>：需要对于可能发生的故障具有足够的恢复机制，来保证最终结果的每一条Event 仅被写入一次</li>
+</ul>
+<h5 id="3-编程模型"><a href="#3-编程模型" class="headerlink" title="3. 编程模型"></a>3. 编程模型</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统设计</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">流式处理系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c++进阶－无锁编程实战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">c++进阶－无锁编程高阶培训整理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="archive-article-date">
+  	<time datetime="2020-07-09T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="第一课：原子编程和内存模型-上"><a href="#第一课：原子编程和内存模型-上" class="headerlink" title="第一课：原子编程和内存模型(上)"></a>第一课：原子编程和内存模型(上)</h4><h5 id="1-1-乱序执行和SC-DRF"><a href="#1-1-乱序执行和SC-DRF" class="headerlink" title="1.1 乱序执行和SC-DRF"></a>1.1 乱序执行和SC-DRF</h5><p><strong>乱序原因1</strong>：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的</p>
+<img src="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A14%3A04Z%2F1800%2F%2F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b" width="70%" height="60%" align=left\>
+
+<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态
+        
+          <a class="article-more-a" href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -191,7 +355,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">展开全文 >></a>
         </p>
       
 
@@ -241,7 +405,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h5><ul>
+        <h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><ul>
 <li>横向和纵向扩展</li>
 <li><strong>CAP（一致性、可用性和分区一致性）</strong>：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍</li>
 <li><strong>BASE</strong>：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做到<strong>强一致性</strong>也可以做到<strong>最终一致性</strong>:
@@ -845,192 +1009,9 @@
 
 
   
-    <article id="post-每天一道leetcode之绝对差不超过限制的最长连续子数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">每天一道leetcode－1438绝对差不超过限制的最长连续子数组</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2020-05-20T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给你一个整数数组 nums ，和一个表示限制的整数 limit，请你返回最长连续子数组的长度，该子数组中的任意两个元素之间的绝对差必须小于或者等于 limit 。</p>
-</blockquote>
-<p>思路：使用滑动窗口保持符合条件的子数组，记录最长长度，怎样确定子数组是否符合条件，需要知道两个关键数据：</p>
-<ul>
-<li>子数组中的最大值</li>
-<li>子数组中的最小值</li>
-<li>需要对滑入窗口的数据记录，滑出的数据删除，并且使这些记录方便的算出最大值和最小值<ul>
-<li>使用 map / multiset 可以在滑入滑出的时候方便的增减对应数据</li>
-<li>同时 map / multiset 本身是有序的，可以方便的找出最大值最小值</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-每天一道leetcode之和为k的自子数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/">每天一道leetcode－560和为k的子数组</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2020-05-14T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
-</blockquote>
-<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。</p>
-        
-          <a class="article-more-a" href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hashtable</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1117,23 +1098,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模版</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1146,6 +1123,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1177,7 +1162,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1185,7 +1170,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">流式处理系统</a>
               </li>
             
             <div class="clearfix"></div>

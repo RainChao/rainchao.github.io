@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/fb3119192d9db7646b68a20e2ba112f7?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-06-14T14%253A09%253A29Z%252F1800%252F%252F20309acc9619c556bbb2e21ffb412a8c12e46c0842bf2cff9afa09216781cd69">
 <meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/56747c8d5d2e73aa4d898e3100f6df0d?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-06-14T14%253A09%253A28Z%252F1800%252F%252Fa828f2d490763bcaca8d6c35cb6142dadfdfc3f548189278520231cf27ddeff7">
 <meta property="article:published_time" content="2020-07-07T02:17:44.000Z">
-<meta property="article:modified_time" content="2020-07-07T03:28:06.000Z">
+<meta property="article:modified_time" content="2020-07-14T06:27:31.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="系统设计">
 <meta name="twitter:card" content="summary">
@@ -160,7 +160,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h5><ul>
+        <h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><ul>
 <li>横向和纵向扩展</li>
 <li><strong>CAP（一致性、可用性和分区一致性）</strong>：根据ant理论只能在其中两个中取两个，不能三者兼得；对于P一般都是要满足的，所以我们在设计系统的时候只能在C和P之间取舍</li>
 <li><strong>BASE</strong>：Base Available(基本可用)、Soft state(软状态)、Eventually consistent(最终一致性)，BASE理论是在CAP理论基础上的权衡和折中的结果，核心思想是即使无法做到<strong>强一致性</strong>也可以做到<strong>最终一致性</strong>:<a id="more"></a><ul>
@@ -174,33 +174,17 @@
 <li><strong>CDN和边缘计算、节点</strong></li>
 <li><strong>Bloom滤波器</strong></li>
 </ul>
-<h5 id="2-流式处理系统"><a href="#2-流式处理系统" class="headerlink" title="2. 流式处理系统"></a>2. 流式处理系统</h5><ul>
-<li><strong>应用场景</strong><ul>
-<li>实时ETL，对数据进行清洗、抽取和转储，用于实时建库</li>
-<li>实时数据分析和统计，对业务指标进行二次加工和聚合，用于实时报表和实时大屏</li>
-<li>实时事件处理，如实时修改高性能存储中的模型</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><strong>流处理系统的三种语义</strong>: <ul>
-<li><strong>at most once(不重可丢)</strong>：消息需要去重，不要求消息幂等；这一种语义无需做任何额外的控制，实现起来最为简单，因此也通常有着最优的性能</li>
-<li><strong>at least once(不丢可重)</strong>：要求消息幂等，而且消息消费server无状态</li>
-<li><strong>exactly once(不丢不重)</strong>：需要对于可能发生的故障具有足够的恢复机制，来保证最终结果的每一条Event 仅被写入一次</li>
-</ul>
-</li>
-<li><strong>编程模型</strong></li>
-<li>​</li>
-</ul>
-<h5 id="3-分布式常用系统"><a href="#3-分布式常用系统" class="headerlink" title="3. 分布式常用系统"></a>3. 分布式常用系统</h5><ul>
+<h4 id="2-分布式常用系统"><a href="#2-分布式常用系统" class="headerlink" title="2. 分布式常用系统"></a>2. 分布式常用系统</h4><ul>
 <li>zookeeper：选主和分布式锁，zookeeper把所有的数据都存储在内存中，所以不能承载太多的数据存储；所以zookeeper适用于存储少量的但是高可用的数据的场景</li>
 </ul>
-<h5 id="4-分布式存储系统"><a href="#4-分布式存储系统" class="headerlink" title="4. 分布式存储系统"></a>4. 分布式存储系统</h5><blockquote>
+<h4 id="3-典型系统设计案例分析"><a href="#3-典型系统设计案例分析" class="headerlink" title="3. 典型系统设计案例分析"></a>3. 典型系统设计案例分析</h4><h5 id="3-1-分布式存储系统"><a href="#3-1-分布式存储系统" class="headerlink" title="3.1 分布式存储系统"></a>3.1 分布式存储系统</h5><blockquote>
 <p>课程链接：<a href="https://www.youtube.com/watch?v=UzLMhqg3_Wc&list=PLrmLmBdmIlps7GJJWW9I7N0P0rB0C3eY2&index=1" target="_blank" rel="noopener">Tushar Roy存储系统设计</a></p>
 </blockquote>
 <img src="http://bj.bcebos.com/ibox-thumbnail98/fb3119192d9db7646b68a20e2ba112f7?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-06-14T14%3A09%3A29Z%2F1800%2F%2F20309acc9619c556bbb2e21ffb412a8c12e46c0842bf2cff9afa09216781cd69" width="40%" height="60%" align=middle\>
 
 <img src="http://bj.bcebos.com/ibox-thumbnail98/56747c8d5d2e73aa4d898e3100f6df0d?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-06-14T14%3A09%3A28Z%2F1800%2F%2Fa828f2d490763bcaca8d6c35cb6142dadfdfc3f548189278520231cf27ddeff7" width="40%" height="60%" align=middle\>
+
+<h5 id="3-2-todo"><a href="#3-2-todo" class="headerlink" title="3.2 todo"></a>3.2 todo</h5>
       
 
       
@@ -283,11 +267,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          c++无锁编程高阶培训整理
+          c++进阶－无锁编程高阶培训整理
         
       </div>
     </a>
@@ -453,23 +437,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模版</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,6 +462,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,7 +501,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,7 +509,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">流式处理系统</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,29 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>c++无锁编程高阶培训整理 | Hexo</title>
+  <title>系统设计－流式系统综述和dstream源码剖析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态">
+  <meta name="description" content="1.  应用场景 实时ETL，对数据进行清洗、抽取和转储，用于实时建库 实时数据分析和统计，对业务指标进行二次加工和聚合，用于实时报表和实时大屏 实时事件处理，如实时修改高性能存储中的模型  2. 流处理系统的三种语义 at most once(不重可丢)：消息需要去重，不要求消息幂等；这一种语义无需做任何额外的控制，实现起来最为简单，因此也通常有着最优的性能 at least once(不丢可重">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++无锁编程高阶培训整理">
-<meta property="og:url" content="http://yoursite.com/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:title" content="系统设计－流式系统综述和dstream源码剖析">
+<meta property="og:url" content="http://yoursite.com/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一课：原子编程和内存模型(上)1.1 乱序执行和SC-DRF乱序原因1：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的   乱序原因2：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态">
+<meta property="og:description" content="1.  应用场景 实时ETL，对数据进行清洗、抽取和转储，用于实时建库 实时数据分析和统计，对业务指标进行二次加工和聚合，用于实时报表和实时大屏 实时事件处理，如实时修改高性能存储中的模型  2. 流处理系统的三种语义 at most once(不重可丢)：消息需要去重，不要求消息幂等；这一种语义无需做任何额外的控制，实现起来最为简单，因此也通常有着最优的性能 at least once(不丢可重">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A14%253A04Z%252F1800%252F%252F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1b25d6dac595c45d2b6300a5fe554b77?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A15%253A55Z%252F1800%252F%252F458e85a98d96c52e4690b16508ed97e06a9ff7b5899a9669c0cd9bc54bf74c19">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/1621372a50c6c8a0f2f4c0dcbf5ae47c?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A17%253A11Z%252F1800%252F%252F9c36d3fefcc199a64257fc9fcb9a04ccf67a195ec23f35b5f7ef6729201b5f24">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/38184988e565779a0750b4f7c9b1a7ab?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T10%253A17%253A26Z%252F1800%252F%252F7c4abe07084e82bce3ba8a93e88599be359106b8ad30900245679f7e38a36984">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/218e5de263b94d57dad1ce96a09dd1b6?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T11%253A35%253A11Z%252F1800%252F%252F57b27cda8a67820942694b11b85a559f5d0361a8b97899b13a43d541236d0e1d">
-<meta property="og:image" content="http://bj.bcebos.com/ibox-thumbnail98/416f88791590965e0b03599944e9a727?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T12%253A47%253A30Z%252F1800%252F%252F4cb875c80974ef33f2c2d6469638a33d3320950e81c4cfb309d6c1823bb6287e">
-<meta property="article:published_time" content="2020-07-09T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-07-09T12:55:12.000Z">
+<meta property="article:published_time" content="2020-07-13T02:17:44.000Z">
+<meta property="article:modified_time" content="2020-07-13T15:13:48.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="markdown">
-<meta property="article:tag" content="c++">
-<meta property="article:tag" content="无锁编程">
+<meta property="article:tag" content="系统设计">
+<meta property="article:tag" content="流式处理系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%252Ffbe74140929444858491fbf2b6bc0935%252F2020-07-09T04%253A14%253A04Z%252F1800%252F%252F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -146,70 +138,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-c++无锁编程实战" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-系统设计－流式处理系统概述" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      c++无锁编程高阶培训整理
+      系统设计－流式系统综述和dstream源码剖析
     </h1>
   
 
         
-        <a href="/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="archive-article-date">
-  	<time datetime="2020-07-09T12:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
+        <a href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2020-07-13T02:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="第一课：原子编程和内存模型-上"><a href="#第一课：原子编程和内存模型-上" class="headerlink" title="第一课：原子编程和内存模型(上)"></a>第一课：原子编程和内存模型(上)</h4><h5 id="1-1-乱序执行和SC-DRF"><a href="#1-1-乱序执行和SC-DRF" class="headerlink" title="1.1 乱序执行和SC-DRF"></a>1.1 乱序执行和SC-DRF</h5><p><strong>乱序原因1</strong>：编译器，编译优化是假设程序是单线程的，如果编译器对程序指令的执行顺序做出改变，只要改变不影响程序在单线程情况下的运行结果，这些改变就是允许的</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1afcbd9a9835cfa886c65080ba49035c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A14%3A04Z%2F1800%2F%2F7bfbe280bc94d5dc8b5eedc1fbab6c0aa7aa9e6eb21329ee1b524cf42d86c66b" width="70%" height="60%" align=left\>
-
-<p><strong>乱序原因2</strong>：处理器，现代处理器允许指令乱序执行，因避免执行等待资源而处于闲置状态<a id="more"></a></p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1b25d6dac595c45d2b6300a5fe554b77?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A15%3A55Z%2F1800%2F%2F458e85a98d96c52e4690b16508ed97e06a9ff7b5899a9669c0cd9bc54bf74c19" width="50%" height="60%" align=left\>
-
-<p><strong>乱序原因3</strong>：存储系统，开始指令的写都是入store buffer(L1 cache)，从store buffer刷新到共享的L2 cache的顺序没法保证</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/1621372a50c6c8a0f2f4c0dcbf5ae47c?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T04%3A17%3A11Z%2F1800%2F%2F9c36d3fefcc199a64257fc9fcb9a04ccf67a195ec23f35b5f7ef6729201b5f24" width="70%" height="60%" align=left\>
-
-<p><strong>乱序原因4</strong>：on-chip network，所谓<strong>片上网络</strong>指的就是L1 cache中的数据通过片上网络(总线)同步到其它的核的L1 cache</p>
-<p>综上所述，乱序执行不可避免，我们应该怎么办？</p>
-<ul>
-<li>不可避免是不争的事实</li>
-<li>如果多线程不涉及共享变量，乱序不会产生坏的影响</li>
-<li>如果读写指令涉及的是共享变量，程序员必须告诉编译器和处理器，告诉的方式就是<strong>锁</strong>或者<strong>原子变量</strong><ul>
-<li>当临界区包含多条指令时用锁</li>
-<li>当临界区只包含一个整数或者指针操作时用原子变量</li>
+        <h5 id="1-应用场景"><a href="#1-应用场景" class="headerlink" title="1.  应用场景"></a>1.  应用场景</h5><ul>
+<li>实时ETL，对数据进行清洗、抽取和转储，用于实时建库</li>
+<li>实时数据分析和统计，对业务指标进行二次加工和聚合，用于实时报表和实时大屏</li>
+<li>实时事件处理，如实时修改高性能存储中的模型</li>
 </ul>
-</li>
+<h5 id="2-流处理系统的三种语义"><a href="#2-流处理系统的三种语义" class="headerlink" title="2. 流处理系统的三种语义"></a>2. 流处理系统的三种语义</h5><ul>
+<li><strong>at most once(不重可丢)</strong>：消息需要去重，不要求消息幂等；这一种语义无需做任何额外的控制，实现起来最为简单，因此也通常有着最优的性能</li>
+<li><strong>at least once(不丢可重)</strong>：要求消息幂等，而且消息消费server无状态</li>
+<li><strong>exactly once(不丢不重)</strong>：需要对于可能发生的故障具有足够的恢复机制，来保证最终结果的每一条Event 仅被写入一次</li>
 </ul>
-<h5 id="1-2-acquire和release语义"><a href="#1-2-acquire和release语义" class="headerlink" title="1.2 acquire和release语义"></a>1.2 acquire和release语义</h5><ul>
-<li><p><strong>acquire:</strong> <code>after is after</code>，之后的所有指令不会早于这条指令执行，尤其是读指令不会</p>
-</li>
-<li><p><strong>release:</strong> <code>before is before</code>，之前的所有指令不会晚于这条指令执行，尤其是写指令不会</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/38184988e565779a0750b4f7c9b1a7ab?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T10%3A17%3A26Z%2F1800%2F%2F7c4abe07084e82bce3ba8a93e88599be359106b8ad30900245679f7e38a36984" width="27%" height="60%" align=left\>
-</li>
-<li><p>acquire and release的实现是通过memory barrier实现的，memory barrier是即实现了acquire又实现了release语义，相当于一个双向的内存栅栏，对于大多数场景是没必要的有损编译和运行期的指令优化</p>
-</li>
-<li><p>一般acquire和release不能手工的使用memory barrier实现，需要借助锁或者原子变量实现acquire和release操作(锁的内部实现其实也是通过原子变量的load acquire和store release实现的，只不过对于锁在原子变量判断失败之后还会有额外的挂起内核的操作)</p>
-</li>
-</ul>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/218e5de263b94d57dad1ce96a09dd1b6?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T11%3A35%3A11Z%2F1800%2F%2F57b27cda8a67820942694b11b85a559f5d0361a8b97899b13a43d541236d0e1d" width="50%" height="60%" align=left\>
-
-<h5 id="1-3-顺序一致性语义"><a href="#1-3-顺序一致性语义" class="headerlink" title="1.3 顺序一致性语义"></a>1.3 顺序一致性语义</h5><p>on-chip network不保证全局序，通俗的讲就是多个原子变量的值对多个核的可见顺序是不保证的；因此这里就需要顺序一致性语义(<strong>seq-cst</strong>)保证在片上网络的全局一致性，</p>
-<h4 id="第二课：原子编程和内存模型-下"><a href="#第二课：原子编程和内存模型-下" class="headerlink" title="第二课：原子编程和内存模型(下)"></a>第二课：原子编程和内存模型(下)</h4><p>todo</p>
-<h4 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h4><ul>
-<li><p>片上网络指的是总线么？</p>
-</li>
-<li><p>数据同步到其它的核的过程中是先刷新到l2然后再刷新到l1中么？</p>
-</li>
-<li><p>下面的场景如果是</p>
-<img src="http://bj.bcebos.com/ibox-thumbnail98/416f88791590965e0b03599944e9a727?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-07-09T12%3A47%3A30Z%2F1800%2F%2F4cb875c80974ef33f2c2d6469638a33d3320950e81c4cfb309d6c1823bb6287e" width="50%" height="60%" align=left\></li>
-</ul>
-
+<h5 id="3-编程模型"><a href="#3-编程模型" class="headerlink" title="3. 编程模型"></a>3. 编程模型</h5>
       
 
       
@@ -222,15 +181,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统设计</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">无锁编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">流式处理系统</a>
         		</li>
       		
 		</ul>
@@ -286,7 +241,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,9 +255,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          c++进阶－invoke的用法和实现
+        
+      </div>
+    </a>
   
-    <a href="/2020/07/07/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">系统设计导论-Tushar Roy</div>
+  
+    <a href="/2020/07/09/c++%E8%BF%9B%E9%98%B6%EF%BC%8D%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++进阶－无锁编程高阶培训整理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -330,7 +294,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="c++无锁编程实战" data-title="c++无锁编程高阶培训整理" data-url="http://yoursite.com/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"></div>
+	<div class="ds-thread" data-thread-key="系统设计－流式处理系统概述" data-title="系统设计－流式系统综述和dstream源码剖析" data-url="http://yoursite.com/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -353,8 +317,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/07/09/c++%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/", 
-    sourceId: "c++无锁编程实战",
+    url: "http://yoursite.com/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/", 
+    sourceId: "系统设计－流式处理系统概述",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -363,7 +327,7 @@
   
 
   
-  <div id="SOHUCS" sid="c++无锁编程实战" ></div> 
+  <div id="SOHUCS" sid="系统设计－流式处理系统概述" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -461,23 +425,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模版</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">无锁编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,6 +450,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,7 +489,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,7 +497,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color5">系统设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">流式处理系统</a>
               </li>
             
             <div class="clearfix"></div>
