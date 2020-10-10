@@ -8,13 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>c++进阶－invoke的用法和实现 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="代码的代码采用了典型的编译常量constexpr和可变模版参数来支持强大的、可扩展的函数功能  123456789101112131415161718192021222324252627282930313233343536373839404142namespace detail &amp;#123;template &lt;typename &gt;constexpr bool is_reference">
+<meta property="og:type" content="article">
 <meta property="og:title" content="c++进阶－invoke的用法和实现">
 <meta property="og:url" content="http://yoursite.com/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码的代码采用了典型的编译常量constexpr和可变模版参数来支持强大的、可扩展的函数功能  123456789101112131415161718192021222324252627282930313233343536373839404142namespace detail &amp;#123;template &lt;typename &gt;constexpr bool is_reference">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-14T12:36:02.000Z">
-<meta property="article:modified_time" content="2020-07-16T04:04:59.000Z">
+<meta property="article:modified_time" content="2020-10-10T06:09:34.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="c++">
 <meta property="article:tag" content="模版">
@@ -156,7 +158,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <blockquote>
+<p>代码的代码采用了典型的编译常量<code>constexpr</code>和可变模版参数来支持强大的、可扩展的函数功能</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> detail &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> &gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">bool</span> is_reference_wrapper_v = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">bool</span> is_reference_wrapper_v&lt;::<span class="built_in">std</span>::reference_wrapper&lt;U&gt;&gt; = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">INVOKE</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ::<span class="built_in">std</span>::forward&lt;F&gt;(f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> T1, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">INVOKE</span><span class="params">(T::* f, T1&amp;&amp; t1, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_member_function_pointer_v&lt;<span class="keyword">decltype</span>(f)&gt;)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_base_of_v&lt;T, ::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">constexpr</span> (is_reference_wrapper_v&lt;::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;) &#123;</span><br><span class="line">            <span class="keyword">return</span> (::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).<span class="built_in">get</span>().*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ((*::<span class="built_in">std</span>::forward&lt;T1&gt;(t1)).*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(args) == <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">static_assert</span>(::<span class="built_in">std</span>::is_member_object_pointer_v&lt;<span class="keyword">decltype</span>(f)&gt;);</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_base_of_v&lt;T, ::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).*f;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">constexpr</span> (is_reference_wrapper_v&lt;::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;) &#123;</span><br><span class="line">            <span class="keyword">return</span> t1.<span class="built_in">get</span>().*f;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (*::<span class="built_in">std</span>::forward&lt;T1&gt;(t1)).*f;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">invoke</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    detail::INVOKE(::<span class="built_in">std</span>::forward&lt;F&gt;(f), ::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -242,6 +249,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          每天一道leetcode－服务中心的最佳位置
+        
+      </div>
+    </a>
   
   
     <a href="/2020/07/13/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8D%E6%B5%81%E5%BC%8F%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" id="article-nav-older" class="article-nav-link-wrap">
@@ -440,6 +456,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -452,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,11 +492,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color3">几何</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,21 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>每天一道leetcode－等式方程的可满足性 | Hexo</title>
+  <title>Tag: leetcode | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本篇文章介绍一种新的数据结构：并查集，用于处理一对元素是否相连，且其关系是动态添加的，这一类问题是动态连通性问题，主要支持合并和是否在同一个集合中。  底层实现结构是数组或者哈希表，用于表示节点指向父节点，初始化时指向自己 合并两个集合就是把其中一个的根节点指向另外一个集合的根节点，只要根节点一致就代表是一个集合 这种表示不相交集合的方法为代表元法  并查集常见的优化方法：  路径压缩：隔代压缩，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="每天一道leetcode－等式方程的可满足性">
-<meta property="og:url" content="http://yoursite.com/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/tags/leetcode/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本篇文章介绍一种新的数据结构：并查集，用于处理一对元素是否相连，且其关系是动态添加的，这一类问题是动态连通性问题，主要支持合并和是否在同一个集合中。  底层实现结构是数组或者哈希表，用于表示节点指向父节点，初始化时指向自己 合并两个集合就是把其中一个的根节点指向另外一个集合的根节点，只要根节点一致就代表是一个集合 这种表示不相交集合的方法为代表元法  并查集常见的优化方法：  路径压缩：隔代压缩，">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-13T15:17:44.000Z">
-<meta property="article:modified_time" content="2020-06-18T03:16:19.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="并查集">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -139,60 +132,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-每天一道leetcode之并查集" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      每天一道leetcode－等式方程的可满足性
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/04/19/%E6%AF%8F%E5%A4%A9LT%E4%B9%8Brestore%20the%20array/" class="archive-article-date">
+  	<time datetime="2020-04-19T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/04/19/%E6%AF%8F%E5%A4%A9LT%E4%B9%8Brestore%20the%20array/">每天一道leetcode－1416restore the array</a>
     </h1>
   
 
-        
-        <a href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2020-06-13T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本篇文章介绍一种新的数据结构：并查集，用于处理一对元素是否相连，且其关系是动态添加的，这一类问题是<strong>动态连通性</strong>问题，主要支持<strong>合并</strong>和<strong>是否在同一个集合中</strong>。</p>
-<ul>
-<li>底层实现结构是数组或者哈希表，用于表示节点指向父节点，初始化时指向自己</li>
-<li>合并两个集合就是把其中一个的根节点指向另外一个集合的根节点，只要根节点一致就代表是一个集合</li>
-<li>这种表示不相交集合的方法为<strong>代表元法</strong></li>
-</ul>
-<p><strong>并查集</strong>常见的优化方法：</p>
-<ul>
-<li><p>路径压缩：隔代压缩，只需要加上一行代码：</p>
-<p>​        parent[x]=parent[parent[x]]</p>
-</li>
-<li><p>路径压缩：完全压缩，需要递归的写法，相比于隔代压缩更复杂</p>
-</li>
-<li><p>按枝合并</p>
-</li>
-</ul>
-<blockquote>
-<p>给定一个由表示变量之间关系的字符串方程组成的数组，每个字符串方程 equations[i] 的长度为 4，并采用两种不同的形式之一：”a==b” 或 “a!=b”。在这里，a 和 b 是小写字母（不一定不同），表示单字母变量名。</p>
-<p>只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。</p>
-</blockquote>
-<a id="more"></a>
-
-<p><strong>c++实现代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    UnionFind()&#123;</span><br><span class="line">        parent.resize(<span class="number">26</span>);</span><br><span class="line">        iota(parent.<span class="built_in">begin</span>(), parent.<span class="built_in">end</span>(), <span class="number">0</span>);</span><br><span class="line">        <span class="comment">//该函数的作用就是对parent赋初始值，是的parent[index] = index</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index == parent[index])</span><br><span class="line">            <span class="keyword">return</span> index;</span><br><span class="line">        parent[index] = <span class="built_in">find</span>(parent[index]);</span><br><span class="line">        <span class="keyword">return</span> parent[index]; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span></span>&#123;</span><br><span class="line">        parent[<span class="built_in">find</span>(index1)] = <span class="built_in">find</span>(index2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">equationsPossible</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; equations)</span> </span>&#123;</span><br><span class="line">        UnionFind uf;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> equation : equations)&#123;</span><br><span class="line">            <span class="keyword">if</span>(equation[<span class="number">1</span>] == <span class="string">'='</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> index1 = equation[<span class="number">0</span>] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="keyword">int</span> index2 = equation[<span class="number">3</span>] - <span class="string">'a'</span>;</span><br><span class="line">                uf.unite(index1, index2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> equation : equations)&#123;</span><br><span class="line">            <span class="keyword">if</span>(equation[<span class="number">1</span>] == <span class="string">'!'</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> index1 = equation[<span class="number">0</span>] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="keyword">int</span> index2 = equation[<span class="number">3</span>] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="keyword">if</span>(uf.<span class="built_in">find</span>(index1) == uf.<span class="built_in">find</span>(index2))</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -206,161 +175,28 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          每天一道leetcode－制作m束花所需的最少天数
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">每天一道leetcode－滑动窗口总结</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="每天一道leetcode之并查集" data-title="每天一道leetcode－等式方程的可满足性" data-url="http://yoursite.com/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "http://yoursite.com/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/", 
-    sourceId: "每天一道leetcode之并查集",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="每天一道leetcode之并查集" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-</script>
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/leetcode/">&amp;laquo; Prev</a><a class="page-number" href="/tags/leetcode/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -384,9 +220,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -482,6 +318,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -494,11 +338,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,11 +354,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color3">几何</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">

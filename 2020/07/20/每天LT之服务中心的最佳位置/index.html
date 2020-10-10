@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>每天一道leetcode－560和为k的子数组 | Hexo</title>
+  <title>每天一道leetcode－服务中心的最佳位置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个整数数组和一个整数 k，你需要找到该数组中和为k的连续的子数组的个数。  解法一分析：保存前缀和，然后分别遍历i（0&lt;&#x3D;i&lt;&#x3D;n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;&#x3D;j&lt;&#x3D;n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。">
+  <meta name="description" content="todo  三分算法详解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每天一道leetcode－560和为k的子数组">
-<meta property="og:url" content="http://yoursite.com/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:title" content="每天一道leetcode－服务中心的最佳位置">
+<meta property="og:url" content="http://yoursite.com/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="给定一个整数数组和一个整数 k，你需要找到该数组中和为k的连续的子数组的个数。  解法一分析：保存前缀和，然后分别遍历i（0&lt;&#x3D;i&lt;&#x3D;n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;&#x3D;j&lt;&#x3D;n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。">
+<meta property="og:description" content="todo  三分算法详解">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-14T15:17:44.000Z">
-<meta property="article:modified_time" content="2020-05-20T01:37:57.000Z">
+<meta property="article:published_time" content="2020-07-20T15:17:44.000Z">
+<meta property="article:modified_time" content="2020-10-10T05:56:37.000Z">
 <meta property="article:author" content="RainChao">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="hashtable">
+<meta property="article:tag" content="几何">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -139,38 +139,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-每天一道leetcode之和为k的自子数组" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-每天LT之服务中心的最佳位置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      每天一道leetcode－560和为k的子数组
+      每天一道leetcode－服务中心的最佳位置
     </h1>
   
 
         
-        <a href="/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2020-05-14T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
+        <a href="/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2020-07-20T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为<strong>k</strong>的连续的子数组的个数。</p>
+        <p>todo</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/pi9nc/article/details/9666627" target="_blank" rel="noopener">三分算法详解</a></p>
 </blockquote>
-<p>解法一分析：保存前缀和，然后分别遍历i（0&lt;=i&lt;=n-1），然后遍历以i起始的子数组sum[i, j]，（i&lt;=j&lt;=n-1），时间复杂度0(n2)，由于前缀和其实可以不保存所以空间复杂度n(1)。</p>
-<a id="more"></a>
 
-<p><strong>c++实现代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solver</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(::<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> start = <span class="number">0</span>; start &lt; nums.<span class="built_in">size</span>(); ++start) &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> <span class="built_in">end</span> = start; <span class="built_in">end</span> &gt;= <span class="number">0</span>; --<span class="built_in">end</span>) &#123;</span><br><span class="line">                sum += nums[<span class="built_in">end</span>];</span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>解法二分析：其实该题可以换个思路，子数组［j, i］的和sum[j, i] = k =pre[i] - pre[j-1]，即pre[j-1] = pre[i] - k所以只需要遍历i，然后使用一个hash表纪录之前的前缀和等于pre[i] - k的个数，然后累加就可以了；需要特别注意的是hash[0]=1。</p>
-<p><strong>c++实现代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        ::<span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; cnt_map;</span><br><span class="line">        cnt_map[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">            <span class="keyword">auto</span> left = sum-k;</span><br><span class="line">            <span class="keyword">auto</span> ite = cnt_map.<span class="built_in">find</span>(left);</span><br><span class="line">            <span class="keyword">if</span> (ite != cnt_map.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                ans += ite-&gt;second;</span><br><span class="line">            &#125;</span><br><span class="line">            cnt_map[sum]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -191,7 +184,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hashtable</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">几何</a>
         		</li>
       		
 		</ul>
@@ -247,7 +240,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,18 +254,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          每天一道leetcode－1438绝对差不超过限制的最长连续子数组
+          redis的各种架构机制梳理
         
       </div>
     </a>
   
   
-    <a href="/2020/05/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">go语言学习</div>
+    <a href="/2020/07/14/c++%E8%BF%9B%E9%98%B6%EF%BC%8Dinvoke%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++进阶－invoke的用法和实现</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -300,7 +293,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="每天一道leetcode之和为k的自子数组" data-title="每天一道leetcode－560和为k的子数组" data-url="http://yoursite.com/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/"></div>
+	<div class="ds-thread" data-thread-key="每天LT之服务中心的最佳位置" data-title="每天一道leetcode－服务中心的最佳位置" data-url="http://yoursite.com/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -323,8 +316,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2020/05/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%92%8C%E4%B8%BAk%E7%9A%84%E8%87%AA%E5%AD%90%E6%95%B0%E7%BB%84/", 
-    sourceId: "每天一道leetcode之和为k的自子数组",
+    url: "http://yoursite.com/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/", 
+    sourceId: "每天LT之服务中心的最佳位置",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -333,7 +326,7 @@
   
 
   
-  <div id="SOHUCS" sid="每天一道leetcode之和为k的自子数组" ></div> 
+  <div id="SOHUCS" sid="每天LT之服务中心的最佳位置" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -467,6 +460,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -479,11 +480,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,11 +496,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color3">几何</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">

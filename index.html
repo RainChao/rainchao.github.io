@@ -134,6 +134,194 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-redis的架构梳理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/">redis的各种架构机制梳理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-10-10T07:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><a href="https://www.jianshu.com/p/d6d2325a5ec7" target="_blank" rel="noopener">参考: redis的哨兵模式和集群模式</a></p>
+</blockquote>
+<p>redis有多种高可用的集群模式，社区redis主要有主从模式、哨兵模式和集群模式，以及百度内建redis的多集群架构模式，主要区别是社区集群都是使用gossip协议实现去中心化的集群解决方案，而内建redis采用的MetasSrver的集中式管理的集群解决方案，下面分别展开讨论</p>
+<h3 id="1-主从模式"><a href="#1-主从模式" class="headerlink" title="1. 主从模式"></a>1. 主从模式</h3><img src="http://bj.bcebos.com/ibox-thumbnail98/937639f62cec44abf48453452c101f1a?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-10-10T07%3A51%3A26Z%2F1800%2F%2F7bfeac0114a0431e4adfa155f48f6a874520887e2ee86e49030a0085ead3a9f2" width="50%" height="100%" alt="我的头像哈哈" align=left\>
+
+<ul>
+<li>一主多从，在对一致性要求不高的场景下，主服务器可用来读，多个从服务器用来写，读写分离提升系统的可扩展性</li>
+<li>通过复制功能可以让主服务器免于执行持久化操作：关闭主服务器的持久化功能，只开启从服务器的持久化功能，提升写性能</li>
+<li>缺点：主服务器挂之后系统不可用<h3 id="2-哨兵模式"><a href="#2-哨兵模式" class="headerlink" title="2. 哨兵模式"></a>2. 哨兵模式</h3><img src="http://bj.bcebos.com/ibox-thumbnail98/82278c19466307019bf55f69fa48bf0e?authorization=bce-auth-v1%2Ffbe74140929444858491fbf2b6bc0935%2F2020-10-10T07%3A58%3A50Z%2F1800%2F%2F23a2d99939ccbbecc92d2c1066eac10adbe31f0dfdda2b92b1d0f2d3c92984b1" width="50%" height="100%" alt="我的头像哈哈" align=left\>
+
+</li>
+</ul>
+<h4 id="2-1-工作机制"><a href="#2-1-工作机制" class="headerlink" title="2.1 工作机制"></a>2.1 工作机制</h4><ol>
+<li>主节点在哨兵的配置中</li>
+<li>哨兵节点会跟配置的主节点建立两条连接<code>命令连接</code>和<code>订阅连接</code></li>
+<li>哨兵通过<code>命令连接</code>周期发送INFO命令来获取主节点的run_id和其从节点信息，然后和所有的从节点也建立<code>命令连接</code>和<code>订阅连接</code></li>
+<li>哨兵通过<code>命令连接</code>的INFO命令从从节点处获取[run_id, role, offset]</li>
+<li><code>订阅连接</code>是用来通过主从节点获取其他的哨兵节点<h4 id="2-2-故障迁移"><a href="#2-2-故障迁移" class="headerlink" title="2.2 故障迁移"></a>2.2 故障迁移</h4></li>
+</ol>
+<p><strong>主观下线</strong>：哨兵节点会每秒一次的周期向建立了命令连接的节点发送PING命令，如果在<code>down-after-milliseconds</code>内没有相应则标记为主观下线<br><strong>客观下线</strong>：哨兵节点会向其他的哨兵节点询问该主观下线节点的状态，如果<code>quorum</code>个节点认为是主观下线则将该节点标记为客观下线</p>
+<blockquote>
+<p>询问命令SENTINEL is-master-down-by-addr <ip> <port> <current_epoch> <run_id></p>
+</blockquote>
+<p><strong>leader选举</strong>：在认为主节点客观下线的情况下，所有的哨兵节点会发起一次选举，命名还是<code>SENTINEL is-master-down-by-addr &lt;ip&gt; &lt;port&gt; &lt;current_epoch&gt; &lt;run_id&gt;</code>，只是run_id不是<em>而是自己的run_id，代表希望将自己设置为主节点，如果超过半数以上的节点返回将该节点标记为leader的话，该哨兵节点为leader并来发起对这次的故障进行迁移<br>*</em>故障迁移**：1、从从节点中选出新的主节点(offset最大) 2、通过<code>SLAVE no one</code>命令设置主节点，通过<code>SLAVE of</code>命名告知其他从节点新的主节点</p>
+<h4 id="2-3-优缺点"><a href="#2-3-优缺点" class="headerlink" title="2.3 优缺点"></a>2.3 优缺点</h4><p>优点：自从故障迁移<br>缺点：没法进行水平扩展，系统容量有限</p>
+<h3 id="3-集群模式"><a href="#3-集群模式" class="headerlink" title="3. 集群模式"></a>3. 集群模式</h3><h3 id="4-中心集群模式"><a href="#4-中心集群模式" class="headerlink" title="4. 中心集群模式"></a>4. 中心集群模式</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">架构设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-每天LT之服务中心的最佳位置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/">每天一道leetcode－服务中心的最佳位置</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2020-07-20T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>todo</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/pi9nc/article/details/9666627" target="_blank" rel="noopener">三分算法详解</a></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">几何</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/20/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E6%9C%80%E4%BD%B3%E4%BD%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-c++进阶－invoke的用法和实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -154,7 +342,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <blockquote>
+<p>代码的代码采用了典型的编译常量<code>constexpr</code>和可变模版参数来支持强大的、可扩展的函数功能</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> detail &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> &gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">bool</span> is_reference_wrapper_v = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">bool</span> is_reference_wrapper_v&lt;::<span class="built_in">std</span>::reference_wrapper&lt;U&gt;&gt; = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">INVOKE</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ::<span class="built_in">std</span>::forward&lt;F&gt;(f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> T1, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">INVOKE</span><span class="params">(T::* f, T1&amp;&amp; t1, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_member_function_pointer_v&lt;<span class="keyword">decltype</span>(f)&gt;)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_base_of_v&lt;T, ::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">constexpr</span> (is_reference_wrapper_v&lt;::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;) &#123;</span><br><span class="line">            <span class="keyword">return</span> (::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).<span class="built_in">get</span>().*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ((*::<span class="built_in">std</span>::forward&lt;T1&gt;(t1)).*f)(::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(args) == <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">static_assert</span>(::<span class="built_in">std</span>::is_member_object_pointer_v&lt;<span class="keyword">decltype</span>(f)&gt;);</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(::<span class="built_in">std</span>::is_base_of_v&lt;T, ::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ::<span class="built_in">std</span>::forward&lt;T1&gt;(t1).*f;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">constexpr</span> (is_reference_wrapper_v&lt;::<span class="built_in">std</span>::<span class="keyword">decay_t</span>&lt;T1&gt;&gt;) &#123;</span><br><span class="line">            <span class="keyword">return</span> t1.<span class="built_in">get</span>().*f;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (*::<span class="built_in">std</span>::forward&lt;T1&gt;(t1)).*f;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt; </span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">invoke</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">    detail::INVOKE(::<span class="built_in">std</span>::forward&lt;F&gt;(f), ::<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -464,19 +657,19 @@
 
 
   
-    <article id="post-每天一道leetcode之全1矩阵的个数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-每天LT之全1矩阵的个数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/">每天一道leetcode－5454题统计全1子矩形的个数</a>
+      <a class="article-title" href="/2020/07/05/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/">每天一道leetcode－5454题统计全1子矩形的个数</a>
     </h1>
   
 
         
-        <a href="/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/" class="archive-article-date">
+        <a href="/2020/07/05/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/" class="archive-article-date">
   	<time datetime="2020-07-05T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
 </a>
         
@@ -491,7 +684,7 @@
 
 <p><strong>题解一</strong>：1、定义状态dp(i)(j)为以[i,j]结尾的前缀矩阵的包含1的个数，则状态转移关系：dp(i)(j)=dp(i)(j-1)+dp(i-1)(j)-dp(i-1)(j-1)+mat(i)(j)==1；2、之后利用该前缀1的状态去求全1子矩阵的个数，具体方法仍然是动态规划的思想， 定义状态dp1(i)(j)为以[i,j]结尾的前缀矩阵包含全1子矩阵的个数，则状态转移关系：dp1(i)(j)=dp1(i)(j-1)+dp1(i-1)(j)-dp1(i-1)(j-1)+self，其中self就是包含mat(i)(j)的全1子矩阵的个数，使用dp去求，整体的时间复杂度O((m*n)^4)。</p>
         
-          <a class="article-more-a" href="/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/#more">more >></a>
+          <a class="article-more-a" href="/2020/07/05/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/#more">more >></a>
         
       
 
@@ -523,7 +716,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/05/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/">展开全文 >></a>
         </p>
       
 
@@ -553,19 +746,19 @@
 
 
   
-    <article id="post-每天一道leetcode之最长公共前缀" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-每天LT之最长公共前缀" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/15/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">每天一道leetcode－查找最长公共前缀</a>
+      <a class="article-title" href="/2020/06/15/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">每天一道leetcode－查找最长公共前缀</a>
     </h1>
   
 
         
-        <a href="/2020/06/15/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/" class="archive-article-date">
+        <a href="/2020/06/15/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/" class="archive-article-date">
   	<time datetime="2020-06-15T14:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-15</time>
 </a>
         
@@ -579,7 +772,7 @@
 </blockquote>
 <p>分析：本题的最直接做法是依次进行列匹配，找到最长的公共子序列；但是更好的思路是采用二分查找的方式进行查找，但是一个关键的点需要注意的是：mid＝(r-l+1)/2，而不能采用传统的m=(r-l)/2，否则会出现死循环，如l=2，r=3，则mid=(2+3)/2=2且满足条件，则l=mid，这种场景会导致l和r始终不变，陷入死循环。</p>
         
-          <a class="article-more-a" href="/2020/06/15/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/#more">more >></a>
+          <a class="article-more-a" href="/2020/06/15/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/#more">more >></a>
         
       
 
@@ -611,7 +804,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/15/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/06/15/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">展开全文 >></a>
         </p>
       
 
@@ -641,19 +834,19 @@
 
 
   
-    <article id="post-每天一道leetcode之制作 m 束花所需的最少天数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-每天LT之制作 m 束花所需的最少天数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">每天一道leetcode－制作m束花所需的最少天数</a>
+      <a class="article-title" href="/2020/06/14/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">每天一道leetcode－制作m束花所需的最少天数</a>
     </h1>
   
 
         
-        <a href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" class="archive-article-date">
+        <a href="/2020/06/14/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/" class="archive-article-date">
   	<time datetime="2020-06-14T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
 </a>
         
@@ -671,7 +864,7 @@
 <p>分析：本题最直接的思路是采用暴力查找，时间复杂度是O(n^2)，肯定会超时。可以使用二分查找的思路将查找的时间复杂度从O(n^2)降低到O(nlog(n))，二分查找满足条件的下界。</p>
 <p>定义[l, r]区间始终满足能够制作m束花，且l是下界，也就是满足条件的第一天;</p>
         
-          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/#more">more >></a>
+          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/#more">more >></a>
         
       
 
@@ -703,7 +896,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/06/14/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%88%B6%E4%BD%9C%20m%20%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0/">展开全文 >></a>
         </p>
       
 
@@ -733,19 +926,19 @@
 
 
   
-    <article id="post-每天一道leetcode之并查集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-每天LT之并查集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">每天一道leetcode－等式方程的可满足性</a>
+      <a class="article-title" href="/2020/06/13/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">每天一道leetcode－等式方程的可满足性</a>
     </h1>
   
 
         
-        <a href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="archive-article-date">
+        <a href="/2020/06/13/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="archive-article-date">
   	<time datetime="2020-06-13T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
 </a>
         
@@ -774,7 +967,7 @@
 <p>只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。</p>
 </blockquote>
         
-          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/#more">more >></a>
+          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/#more">more >></a>
         
       
 
@@ -806,180 +999,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-每天一道leetcode之滑动窗口总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">每天一道leetcode－滑动窗口总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-06-12T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给你一个整数数组 <code>nums</code> ，和一个表示限制的整数 <code>limit</code>，请你返回最长连续子数组的长度，该子数组中的任意两个元素之间的绝对差必须小于或者等于 <code>limit</code>。</p>
-</blockquote>
-<p>分析：该题是典型的滑动窗口＋multiset组合问题，multiset保存滑动窗口内的所有数，在滑动的过程中动态添加和剔除数据，整个滑动的过程中窗口的最大值就是最终要求的值。</p>
-        
-          <a class="article-more-a" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sliding window</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/12/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode技巧总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">leetcode－常用技巧总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-06-01T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="1-stl中求最大值的方法"><a href="#1-stl中求最大值的方法" class="headerlink" title="1. stl中求最大值的方法"></a>1. stl中求最大值的方法</h5><p>max_element(iterator begin, iterator end);</p>
-<h5 id="2-求n个比特位中的不包含连续1的个数"><a href="#2-求n个比特位中的不包含连续1的个数" class="headerlink" title="2. 求n个比特位中的不包含连续1的个数"></a>2. 求n个比特位中的不包含连续1的个数</h5><blockquote>
-<p>该题是数位动态规划的思路：定义<strong>f(n)</strong>为n个比特位中的不包含连续1的个数：</p>
-<ul>
-<li>当最高位n为1时，次高位n-1位只能为0，所以这时只跟<strong>f(n-2)</strong>有关</li>
-<li>当最高位n为0时，次高位n-1位可为0可为1，所以这时跟<strong>f(n-1)</strong>有关</li>
-<li>综合以上分析：<strong>f(n)=f(n-1)+f(n-2)</strong></li>
-</ul>
-</blockquote>
-<h5 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h5>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/01/leetcode%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/06/13/%E6%AF%8F%E5%A4%A9LT%E4%B9%8B%E5%B9%B6%E6%9F%A5%E9%9B%86/">展开全文 >></a>
         </p>
       
 
@@ -1134,6 +1154,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -1146,11 +1174,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1162,11 +1190,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color3">几何</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">

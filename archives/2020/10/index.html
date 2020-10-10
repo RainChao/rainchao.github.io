@@ -6,21 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>每天一道leetcode－5454题统计全1子矩形的个数 | Hexo</title>
+  <title>Archives: 2020/10 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给你一个只包含 0 和 1 的 rows * columns 矩阵 mat ，请你返回有多少个 子矩形 的元素全部都是1  1234567891011输入：mat &#x3D; [[1,0,1],            [1,1,0],            [1,1,0]]输出：13解释：有 6 个 1x1 的矩形。有 2 个 1x2 的矩形。有 3 个 2x1 的矩形。有 1 个 2x2 的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="每天一道leetcode－5454题统计全1子矩形的个数">
-<meta property="og:url" content="http://yoursite.com/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/2020/10/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="给你一个只包含 0 和 1 的 rows * columns 矩阵 mat ，请你返回有多少个 子矩形 的元素全部都是1  1234567891011输入：mat &#x3D; [[1,0,1],            [1,1,0],            [1,1,0]]输出：13解释：有 6 个 1x1 的矩形。有 2 个 1x2 的矩形。有 3 个 2x1 的矩形。有 1 个 2x2 的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-05T15:17:44.000Z">
-<meta property="article:modified_time" content="2020-07-06T03:54:19.000Z">
 <meta property="article:author" content="RainChao">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -139,217 +132,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-每天一道leetcode之全1矩阵的个数" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      每天一道leetcode－5454题统计全1子矩形的个数
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-10-10T07:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/10/10/redis%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A2%B3%E7%90%86/">redis的各种架构机制梳理</a>
     </h1>
   
 
-        
-        <a href="/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-07-05T15:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给你一个只包含 0 和 1 的 <code>rows * columns</code> 矩阵 <code>mat</code> ，请你返回有多少个 <strong>子矩形</strong> 的元素全部都是1</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：mat &#x3D; [[1,0,1],</span><br><span class="line">            [1,1,0],</span><br><span class="line">            [1,1,0]]</span><br><span class="line">输出：13</span><br><span class="line">解释：</span><br><span class="line">有 6 个 1x1 的矩形。</span><br><span class="line">有 2 个 1x2 的矩形。</span><br><span class="line">有 3 个 2x1 的矩形。</span><br><span class="line">有 1 个 2x2 的矩形。</span><br><span class="line">有 1 个 3x1 的矩形。</span><br><span class="line">矩形数目总共 &#x3D; 6 + 2 + 3 + 1 + 1 &#x3D; 13 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>题解一</strong>：1、定义状态dp(i)(j)为以[i,j]结尾的前缀矩阵的包含1的个数，则状态转移关系：dp(i)(j)=dp(i)(j-1)+dp(i-1)(j)-dp(i-1)(j-1)+mat(i)(j)==1；2、之后利用该前缀1的状态去求全1子矩阵的个数，具体方法仍然是动态规划的思想， 定义状态dp1(i)(j)为以[i,j]结尾的前缀矩阵包含全1子矩阵的个数，则状态转移关系：dp1(i)(j)=dp1(i)(j-1)+dp1(i-1)(j)-dp1(i-1)(j-1)+self，其中self就是包含mat(i)(j)的全1子矩阵的个数，使用dp去求，整体的时间复杂度O((m*n)^4)。</p>
-<a id="more"></a>
-
-<p><strong>c++实现代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numSubmat</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">dp</span><span class="params">(mat.<span class="built_in">size</span>(), <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(mat[<span class="number">0</span>].<span class="built_in">size</span>(), <span class="number">0</span>))</span></span>;</span><br><span class="line">        <span class="keyword">if</span> (mat[<span class="number">0</span>][<span class="number">0</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">            dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> m = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; i &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> bottom = ((i<span class="number">-1</span>) &lt; <span class="number">0</span>? <span class="number">0</span> : dp[i<span class="number">-1</span>][j]);</span><br><span class="line">                <span class="keyword">int</span> left = ((j<span class="number">-1</span>) &lt; <span class="number">0</span>? <span class="number">0</span> : dp[i][j<span class="number">-1</span>]);</span><br><span class="line">                <span class="keyword">int</span> middle = ((i<span class="number">-1</span>) &lt; <span class="number">0</span> <span class="keyword">or</span> (j<span class="number">-1</span>)&lt;<span class="number">0</span>? <span class="number">0</span> : dp[i<span class="number">-1</span>][j<span class="number">-1</span>]);</span><br><span class="line">                <span class="keyword">int</span> self = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span> (mat[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    dp[i][j] = bottom+left-middle+<span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = bottom+left-middle;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>题解二：</strong>上面的思路的时间复杂度过高，我们重新定义状态dp(i)(j)为第i行中以j结尾的前缀数组中包含1的个数，则状态转移关系：dp(i)(j)=dp(i)(j-1)+mat(i)(j)==1；在循环的时候我们先枚举所有的列，然后再扫一遍行(<strong>维度压缩的思想：先确定一个维度之后那么原来的二维问题就转化为一维问题</strong>)，找到全1的连续的行的个数cnt，那么我们的就给最终的统计值加上(cnt)*(cnt+1)/2，通过这种方式能将时间复杂度降为O((m＊n)^3)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int numSubmat(vector&lt;vector&lt;int&gt;&gt;&amp; mat) &#123;</span><br><span class="line">        ::std::vector&lt;::std::vector&lt;int&gt;&gt; dp(mat.size(), ::std::vector&lt;int&gt;(mat[0].size()+1, 0));</span><br><span class="line">        int m &#x3D; mat.size();</span><br><span class="line">        int n &#x3D; mat[0].size();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;</span><br><span class="line">                dp[i][j] &#x3D; dp[i][j-1] + mat[i][j-1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int ans &#x3D; 0;</span><br><span class="line">        for (int l &#x3D; 1; l &lt;&#x3D; n; l++) &#123;</span><br><span class="line">            for (int r &#x3D; l; r &lt;&#x3D; n; r++) &#123;</span><br><span class="line">                int cnt &#x3D; 0;</span><br><span class="line">                for (int i &#x3D; 0; i &lt; m; i++) &#123;</span><br><span class="line">                    int ones &#x3D; dp[i][r] - dp[i][l-1];</span><br><span class="line">                    if (ones &#x3D;&#x3D; (r-l+1)) &#123;</span><br><span class="line">                        cnt++;</span><br><span class="line">                    &#125; else if (cnt &gt; 0) &#123;</span><br><span class="line">                        ans +&#x3D; (cnt)*(cnt+1)&#x2F;2;</span><br><span class="line">                        cnt&#x3D;0;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                ans +&#x3D; (cnt)*(cnt+1)&#x2F;2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">架构设计</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/07/07/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AF%BC%E8%AE%BA%EF%BC%8DTushar%20Roy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          系统设计导论-Tushar Roy
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/06/15/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">每天一道leetcode－查找最长公共前缀</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="每天一道leetcode之全1矩阵的个数" data-title="每天一道leetcode－5454题统计全1子矩形的个数" data-url="http://yoursite.com/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "http://yoursite.com/2020/07/05/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93leetcode%E4%B9%8B%E5%85%A81%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%AA%E6%95%B0/", 
-    sourceId: "每天一道leetcode之全1矩阵的个数",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="每天一道leetcode之全1矩阵的个数" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -372,8 +212,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
@@ -470,6 +310,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -482,11 +330,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">hashtable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,11 +346,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+                <a href="javascript:void(0)" class="js-tag color3">几何</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sliding window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
